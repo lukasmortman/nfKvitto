@@ -1,5 +1,5 @@
 import {useState} from "react";
-import logo from '../public/NF logga.svg'
+import logo from '../public/loggan.jpg'
 import styles from './test.module.css'
 import Image from 'next/image'
 
