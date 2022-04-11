@@ -11,6 +11,7 @@ export default function SIDA() {
         bild: "",
         swish: ""
     })
+    const [skickat,setSkickat] = useState("")
 
 
     const handleSubmit = event => {
@@ -21,6 +22,19 @@ export default function SIDA() {
         console.log(`bild: ${state.bild}`)
         console.log(`swish: ${state.swish}`)
         postData(state)
+        setState({
+            vara: "",
+            pris: "",
+            datum: "",
+            bild: "",
+            swish: ""
+        })
+        setSkickat("kvitto inskickat")
+        setTimeout(fixaText,5000)
+        function fixaText(){
+            setSkickat("")
+        }
+
     };
 
     const handleChange = event => {
@@ -63,19 +77,22 @@ export default function SIDA() {
             <div className={styles.Form}>
                 <form className={styles.formStyle} onSubmit={handleSubmit}>
                     <label className={styles.labelStyle} htmlFor="vara">vara:</label>
-                    <input type="text" name="vara" placeholder="varunamn" required onChange={handleChange}/>
+                    <input type="text" name="vara" placeholder="varunamn" value={state.vara} required onChange={handleChange}/>
                     <label className={styles.labelStyle} htmlFor="pris">pris:</label>
-                    <input type="number" name="pris" placeholder="pris" required onChange={handleChange}/>
+                    <input type="number" name="pris" placeholder="pris" value={state.pris} required onChange={handleChange}/>
                     <label className={styles.labelStyle} htmlFor="datum">datum:</label>
-                    <input type="date" name="datum" placeholder={Date.now()} required onChange={handleChange}/>
+                    <input type="date" name="datum" value={state.datum} placeholder={Date.now()} required onChange={handleChange}/>
                     <label className={styles.labelStyle} htmlFor="bild">kvitto:</label>
-                    <input type="file" name="bild" placeholder="bild på kvitto" required onChange={handleChange}/>
+                    <input type="file" name="bild" value={state.bild} placeholder="bild på kvitto" required onChange={handleChange}/>
                     <label className={styles.labelStyle} htmlFor="vara">swish-nummer:</label>
-                    <input type="tel" name="swish" placeholder={"swishnummer"} required
+                    <input type="tel" name="swish" value={state.swish} placeholder={"swishnummer"} required
                            pattern="[0-9]{3}-[0-9]{7}|[0-9]{10}" onChange={handleChange}/>
-                    <button className={styles.buttonStyle} type="submit">
-                        skicka in kvitto
-                    </button>
+                    <span>
+                        <button className={styles.buttonStyle} type="submit">
+                            skicka in kvitto
+                        </button>
+                        <p style={{display: "inline-block",marginLeft:"1.5vw"}}>{skickat}</p>
+                    </span>
                 </form>
             </div>
         </div>
