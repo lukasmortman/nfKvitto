@@ -4,7 +4,7 @@ import styles from './main.module.css'
 import Image from 'next/image'
 
 
-export default function Main() {
+export default function SIDA() {
     const [state, setState] = useState({
         vara: "",
         pris: [],
