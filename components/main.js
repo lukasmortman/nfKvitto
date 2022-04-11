@@ -38,6 +38,7 @@ export default function Main() {
                     src={logo}
                     width={400}
                     height={300}
+                    priority={true}
                     className={styles.FixaText}
                     style={{marginTop: "1vh"}}
                 />
@@ -62,6 +63,8 @@ export default function Main() {
                 </form>
             </div>
             <Head>
+                <html lang="SE"/>
+                <meta name="description" content="En hemsida för att hantera den Naturvetenskapliga föreningens kvitton och köp."/>
                 <title>NF Kvitton</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
                 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
