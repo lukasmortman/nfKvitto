@@ -1,0 +1,41 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+    ". Text ."
+    ". Form ."
+    ". . .";
+    justify-content: center;
+    align-items: start;
+}
+.Form {
+    justify-self: center;
+    grid-area: Form;
+}
+.Text {
+    justify-self: center;
+    align-self: center;
+    grid-area: Text;
+}
+
+.formStyle {
+    display: flex;
+    flex-direction: column;
+}
+
+.labelStyle {
+    margin-top: 1vh;
+    margin-bottom: 0.5vh;
+}
+
+.buttonStyle {
+    margin-top: 1vh;
+    width: fit-content;
+}
+
+.FixaText {
+    display: flex;
+    justify-content: center;
+}
