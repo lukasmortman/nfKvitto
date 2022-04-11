@@ -36,8 +36,8 @@ export default function Main() {
                 <Image
                     alt="nf logga"
                     src={logo}
-                    width={200}
-                    height={150}
+                    width={400}
+                    height={300}
                     className={styles.FixaText}
                     style={{marginTop: "1vh"}}
                 />
