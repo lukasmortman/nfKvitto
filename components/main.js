@@ -36,9 +36,9 @@ export default function SIDA() {
                 <Image
                     alt="nf logga"
                     src={logo}
-                    width={400}
-                    height={300}
                     priority={true}
+                    quality={100}
+                    layout={"responsive"}
                     className={styles.FixaText}
                     style={{marginTop: "1vh"}}
                 />

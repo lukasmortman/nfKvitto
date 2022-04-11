@@ -11,6 +11,9 @@
 .Text {
     justify-self: center;
     align-self: center;
+    width: 70vw;
+    margin-top: 2vh;
+    max-width: 400px;
 }
 
 
