@@ -29,7 +29,7 @@ export default function SIDA() {
             bild: "",
             swish: ""
         })
-        setSkickat("kvitto inskickat")
+        setSkickat("Kvitto inskickat")
         setTimeout(fixaText,5000)
         function fixaText(){
             setSkickat("")
@@ -91,7 +91,7 @@ export default function SIDA() {
                         <button className={styles.buttonStyle} type="submit">
                             skicka in kvitto
                         </button>
-                        <p style={{display: "inline-block",marginLeft:"1.5vw"}}>{skickat}</p>
+                        <p style={{display: "inline-block",marginLeft:"0.5vw", fontWeight:"bold"}}>{skickat}</p>
                     </span>
                 </form>
             </div>
