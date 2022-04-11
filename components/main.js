@@ -3,15 +3,15 @@ import logo from '../public/loggan.jpg'
 import styles from './test.module.css'
 import Image from 'next/image'
 
-
 export default function SIDA() {
     const [state, setState] = useState({
         vara: "",
-        pris: [],
-        datum: [],
-        bild: [],
-        swish: []
+        pris: "",
+        datum: "",
+        bild: "",
+        swish: ""
     })
+
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -20,6 +20,7 @@ export default function SIDA() {
         console.log(`datum: ${state.datum}`)
         console.log(`bild: ${state.bild}`)
         console.log(`swish: ${state.swish}`)
+        postData(state)
     };
 
     const handleChange = event => {
@@ -29,6 +30,21 @@ export default function SIDA() {
             [event.target.name]: value
         });
     }
+
+    const postData = async (form) => {
+        try {
+            const res = await fetch('/api/Information', {
+                method: 'POST',
+                body: JSON.stringify(form),
+            })
+            if (!res.ok) {
+                throw new Error(res.status)
+            }
+        } catch (error) {
+            console.log("error", error)
+        }
+    }
+
 
     return (
         <div className={styles.container}>
