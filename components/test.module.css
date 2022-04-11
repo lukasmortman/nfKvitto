@@ -1,22 +1,16 @@
 .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 0 0;
-    grid-template-areas:
-    ". Text ."
-    ". Form .";
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: start;
 }
 .Form {
+    width: fit-content;
     justify-self: center;
-    grid-area: Form;
+    align-self: center;
 }
 .Text {
     justify-self: center;
     align-self: center;
-    grid-area: Text;
 }
 
 .formStyle {
