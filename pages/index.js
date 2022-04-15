@@ -1,4 +1,4 @@
-import SIDA from "../components/main";
+import SIDA from "../components/SkickaKvitto";
 import Head from "next/head";
 
 export default function Home() {

@@ -1,15 +1,15 @@
 import {useState} from "react";
 import logo from '../public/loggan.jpg'
-import styles from './test.module.css'
+import styles from '../styles/SkickaKvitto.module.css'
 import Image from 'next/image'
 
 
 export default function SIDA() {
     const [state, setState] = useState({
-        vara: null,
-        pris: null,
-        datum: null,
-        bild: null,
+        vara: "",
+        pris: "",
+        datum: "",
+        bild: "",
         swish: "",
     })
     const [skickat, setSkickat] = useState("")
@@ -69,9 +69,6 @@ export default function SIDA() {
                 method: 'POST',
                 body: JSON.stringify(form),
             })
-            if (!res.ok) {
-                throw new Error(res.status)
-            }
         } catch (error) {
             console.log("error", error)
         }
@@ -90,7 +87,7 @@ export default function SIDA() {
                     className={styles.FixaText}
                     style={{marginTop: "1vh"}}
                 />
-                <h1 className={styles.FixaText} style={{marginTop: "-0.5vh"}}>nf kvitto</h1>
+                <h1 className={styles.FixaText} style={{margin: "-0.5vh"}}>nf kvitto</h1>
             </div>
             <div className={styles.Form}>
                 <form className={styles.formStyle} onSubmit={handleSubmit}>

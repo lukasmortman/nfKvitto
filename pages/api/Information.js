@@ -2,8 +2,6 @@ import dbConnect from '../../lib/dbConnect'
 import Info from '../../models/Information'
 
 export default async function handler(req, res) {
-    const {method} = req
-
     await dbConnect()
 
 

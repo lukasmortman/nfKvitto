@@ -16,7 +16,6 @@
     max-width: 400px;
 }
 
-
 .formStyle {
     display: flex;
     flex-direction: column;
@@ -35,6 +34,7 @@
 .FixaText {
     display: flex;
     justify-content: center;
+    font-size: 5rem;
 }
 
 @media screen and (max-height: 1000px) {
@@ -43,3 +43,4 @@
          padding-bottom: 20vh;
     }
 }
+
