@@ -38,3 +38,10 @@
     justify-self: center;
     padding-right: 1rem;
 }
+
+@media screen and (max-height: 1000px) {
+
+    .container{
+        padding-bottom: 20vh;
+    }
+}

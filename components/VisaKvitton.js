@@ -29,7 +29,7 @@ export default function VisaKvitton({data}) {
                         <p>swishnummer: {swish}</p>
                     </div>
                 </div>
-            ))};
+            ))}
         </div>
     )
 
