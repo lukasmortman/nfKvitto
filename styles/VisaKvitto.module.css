@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.Header {
+    justify-self: center;
+    align-self: center;
+    width: 70vw;
+    margin-top: 2vh;
+    max-width: 400px;
+}
+
+
+.FlexAndCenter{
+    display: flex;
+    justify-content: center;
+}
+
+.Padding1REM{
+    align-self: center;
+    justify-self: center;
+    min-width: 100px;
+    min-height: 100px;
+    max-height: 100px;
+    max-width: 400px;
+    padding: 1rem;
+}
+
+.ROWFLEX{
+    display: flex;
+    flex-direction: column;
+}
+
+.BILD{
+    align-self: center;
+    justify-self: center;
+    padding-right: 1rem;
+}

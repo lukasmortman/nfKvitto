@@ -4,7 +4,7 @@ import styles from '../styles/SkickaKvitto.module.css'
 import Image from 'next/image'
 
 
-export default function SIDA() {
+export default function SkickaKvitto() {
     const [state, setState] = useState({
         vara: "",
         pris: "",
@@ -65,7 +65,7 @@ export default function SIDA() {
 
     const postData = async (form) => {
         try {
-            const res = await fetch('/api/Information', {
+            const res = await fetch('/api/SkickaData', {
                 method: 'POST',
                 body: JSON.stringify(form),
             })
@@ -110,7 +110,7 @@ export default function SIDA() {
                         <button className={styles.buttonStyle} type="submit">
                             skicka in kvitto
                         </button>
-                        <p style={{display: "inline-block", marginLeft: "0.5vw", fontWeight: "bold"}}>{skickat}</p>
+                        <p style={{display: "inline-block", marginLeft: "0.5vw", fontWeight: "bold", fontSize:"0.7rem"}}>{skickat}</p>
                     </span>
                 </form>
             </div>
