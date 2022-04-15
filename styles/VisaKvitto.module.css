@@ -19,31 +19,27 @@
 }
 
 .Padding1REM{
+    display: grid;
     align-self: center;
     justify-self: center;
-    max-height: 100px;
-    max-width: 500px;
-    padding: 1rem;
+
 }
 
 
+.parent {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    width: fit-content;
+    padding-bottom: 1rem;
+    padding-top: 0.5rem;
 
-.ROWFLEX{
-    flex-direction: column;
-    display: flex;
-    word-wrap: break-word;
-    min-width: 15vw;
 }
 
-.BILD{
-    align-self: center;
-    justify-self: center;
-    padding-right: 1rem;
-}
-
-@media screen and (max-height: 1000px) {
-
-    .container{
-        padding-bottom: 20vh;
-    }
-}
+.div1 { grid-area: 1 / 2 / 2 / 3; align-self: center; justify-content: center;}
+.div2 { grid-area: 2 / 2 / 3 / 3; align-self: center; justify-content: center;}
+.div3 { grid-area: 3 / 2 / 4 / 3; align-self: center; justify-content: center;}
+.div4 { grid-area: 4 / 2 / 5 / 3; align-self: center; justify-content: center;}
+.div5 { grid-area: 1 / 1 / 5 / 2; align-self: center; margin-right: 1rem; justify-content: center;}

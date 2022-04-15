@@ -7,6 +7,12 @@ label, button, input, p{
 }
 
 p{margin:0.25rem}
+@media screen and (max-height: 1000px) {
+
+    .container{
+        padding-bottom: 20vh;
+    }
+}
 
 @font-face {
     font-family: 'ParchmentEGEN';
