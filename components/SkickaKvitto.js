@@ -69,6 +69,7 @@ export default function SkickaKvitto() {
                 method: 'POST',
                 body: JSON.stringify(form),
             })
+            res.status(200).end();
         } catch (error) {
             console.log("error", error)
         }
@@ -106,12 +107,10 @@ export default function SkickaKvitto() {
                     <label className={styles.labelStyle} htmlFor="vara">swish-nummer:</label>
                     <input type="tel" name="swish" value={state.swish} placeholder={"swishnummer"} required
                            pattern="[0-9]{3}-[0-9]{7}|[0-9]{10}" onChange={handleChange}/>
-                    <span>
                         <button className={styles.buttonStyle} type="submit">
                             skicka in kvitto
                         </button>
-                        <p style={{display: "inline-block", marginLeft: "0.5vw", fontWeight: "bold", fontSize:"0.7rem"}}>{skickat}</p>
-                    </span>
+                    <p style={{display: "inline-block", marginLeft: "0.5vw", fontWeight: "bold", fontSize:"0.7rem"}}>{skickat}</p>
                 </form>
             </div>
         </div>

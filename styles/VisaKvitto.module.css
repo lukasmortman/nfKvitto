@@ -21,16 +21,18 @@
 .Padding1REM{
     align-self: center;
     justify-self: center;
-    min-width: 100px;
-    min-height: 100px;
     max-height: 100px;
-    max-width: 400px;
+    max-width: 500px;
     padding: 1rem;
 }
 
+
+
 .ROWFLEX{
-    display: flex;
     flex-direction: column;
+    display: flex;
+    word-wrap: break-word;
+    min-width: 15vw;
 }
 
 .BILD{
