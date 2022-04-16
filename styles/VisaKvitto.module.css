@@ -46,6 +46,6 @@
 
 @media screen and (max-height: 1000px) {
     .container{
-        padding-bottom: 20vh;
+        padding-bottom: 5vh;
     }
 }
