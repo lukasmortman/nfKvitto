@@ -2,7 +2,9 @@ import VisaKvitton from "../components/VisaKvitton";
 import Head from "next/head";
 import {connectToDatabase} from "../utils/mongodb";
 
+
 export default function Home({data}) {
+
     return (
         <>
             <Head>

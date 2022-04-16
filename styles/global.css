@@ -1,18 +1,19 @@
 h1{
     font-family: ParchmentEGEN, serif;
     font-size: 5rem;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 label, button, input, p{
     font-family: Courier NewEGEN, serif;
 }
 
-p{margin:0.25rem}
-@media screen and (max-height: 1000px) {
 
-    .container{
-        padding-bottom: 20vh;
-    }
-}
+p{margin:0.25rem}
+
 
 @font-face {
     font-family: 'ParchmentEGEN';
