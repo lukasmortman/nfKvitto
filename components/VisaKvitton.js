@@ -1,8 +1,16 @@
 import Image from 'next/image'
 import logo from "../public/loggan.jpg";
 import styles from '../styles/VisaKvitto.module.css'
+import exportFromJSON from 'export-from-json'
 
 export default function VisaKvitton({data}) {
+    const exportType = "xls"
+    const fileName = 'kvittonNF'
+    const fields = ["vara","pris","bild","datum","swish"]
+    function ExportToExcel() {
+        exportFromJSON({ data, fileName, exportType, fields })
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.Header}>
@@ -17,7 +25,7 @@ export default function VisaKvitton({data}) {
                 />
                 <h1 className={styles.FlexAndCenter} style={{margin: "-0.5vh"}}>nf kvitto</h1>
                 <span className={styles.FlexAndCenter}>
-                    <button className={styles.FlexAndCenter}>
+                    <button className={styles.FlexAndCenter} onClick={()=>ExportToExcel()}>
                         exportera till excel
                     </button>
                 </span>
