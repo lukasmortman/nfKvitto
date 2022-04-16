@@ -19,8 +19,8 @@ export default function VisaKvitton({data}) {
             </div>
             <div className={styles.Padding1REM}>
             {data.map(({vara, pris, datum, swish, bild}) => (
-                <div className={`${styles.parent}`}>
-                    <div className={styles.div5}>
+                <div className={`${styles.parent}`} key={vara}>
+                    <div className={styles.div5} >
                         <Image src={bild} alt={"bild på kvittot"} height={80} width={80}/>
                     </div>
                     <div className={styles.div1}><p>namn på vara: {vara} </p>

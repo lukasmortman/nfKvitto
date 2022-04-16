@@ -18,11 +18,6 @@ export default function SkickaKvitto() {
 
     const handleSubmit = event => {
         event.preventDefault();
-        console.log(`varunamn: ${state.vara}`)
-        console.log(`pris: ${state.pris}`)
-        console.log(`datum: ${state.datum}`)
-        console.log(`bild: ${state.bild}`)
-        console.log(`swish: ${state.swish}`)
         postData({vara:state.vara,pris:state.pris,datum:state.datum,bild:base64,swish:state.swish})
         setState({
             vara: "",
@@ -40,12 +35,12 @@ export default function SkickaKvitto() {
 
     };
 
-    const handleChange = event => {
+    const handleChange = async event => {
         if (event.target.name === "bild") {
             const file = event.target.files[0];
             const reader = new FileReader();
-            reader.onloadend = function () {
-                setBase64(reader.result)
+            reader.onloadend =  function () {
+                 setBase64(reader.result)
             }
             reader.readAsDataURL(file);
             const value = event.target.value;
@@ -53,7 +48,6 @@ export default function SkickaKvitto() {
                 ...state,
                 [event.target.name]: value
             });
-            console.log(base64)
         } else {
             const value = event.target.value;
             setState({
@@ -68,8 +62,7 @@ export default function SkickaKvitto() {
             const res = await fetch('/api/SkickaData', {
                 method: 'POST',
                 body: JSON.stringify(form),
-            })
-            res.status(200).end();
+            });
         } catch (error) {
             console.log("error", error)
         }
