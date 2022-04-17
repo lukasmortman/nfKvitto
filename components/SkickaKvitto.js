@@ -91,7 +91,8 @@ export default function SkickaKvitto() {
                             skicka in kvitto
                         </button>
                     <p style={{display: "inline-block", marginLeft: "0.5vw", fontWeight: "bold", fontSize:"0.7rem"}}>{skickat}</p>
-                    <input id="file" type="file" accept="image/*">test</input>
+                    <input id="file" type="file" accept="image/*"/>
+                    <input name="test" placeholder="testing" type="file" accept="image/*"/>
                 </form>
             </div>
     )
