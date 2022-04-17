@@ -1,5 +1,8 @@
 import {useState} from "react";
 import styles from '../styles/SkickaKvitto.module.css'
+import {initializeApp} from "firebase/app";
+import {getDownloadURL, getStorage, ref, uploadString} from "firebase/storage";
+
 
 
 export default function SkickaKvitto() {
@@ -24,6 +27,7 @@ export default function SkickaKvitto() {
             bild: "",
             swish: ""
         })
+        setBase64("")
         setSkickat("Kvitto inskickat")
         setTimeout(fixaText, 5000)
 
@@ -56,15 +60,41 @@ export default function SkickaKvitto() {
         }
     }
 
+
+    function test(test){
+        console.log("sending")
+        let bildurl;
+        const firebaseConfig = {
+            apiKey: "AIzaSyC3Okk1Aa2n5P_4ovSGoqwH7Q5cfjZO_l4",
+            authDomain: "nfkvitton.firebaseapp.com",
+            projectId: "nfkvitton",
+            storageBucket: "nfkvitton.appspot.com",
+            messagingSenderId: "773494506675",
+            appId: "1:773494506675:web:82c77ade0673e7cc651cc6",
+            measurementId: "G-8YPG6B5MDF"
+        };
+        const firebaseApp = initializeApp(firebaseConfig);
+        const storage = getStorage(firebaseApp)
+        let data = (JSON.parse(test))
+        const storageRef = ref(storage, data.vara);
+        const message4 = data.bild;
+        uploadString(storageRef, message4, 'data_url').then((snapshot) => {
+            return getDownloadURL(snapshot.ref)
+        }).then(async downloadURL => {
+            bildurl = downloadURL
+            try {
+                const res = await fetch('/api/SkickaData', {
+                    method: 'POST',
+                    body: JSON.stringify({vara:state.vara,pris:state.pris,datum:state.datum,bild:downloadURL,swish:state.swish}),
+                });
+            } catch (error) {
+                console.log("error", error)
+            }
+        })
+    }
+
     const postData = async (form) => {
-        try {
-            const res = await fetch('/api/SkickaData', {
-                method: 'POST',
-                body: JSON.stringify(form),
-            });
-        } catch (error) {
-            console.log("error", error)
-        }
+        test(JSON.stringify(form))
     }
 
 
@@ -91,7 +121,6 @@ export default function SkickaKvitto() {
                         </button>
                     <p style={{display: "inline-block", marginLeft: "0.5vw", fontWeight: "bold", fontSize:"0.7rem"}}>{skickat}</p>
                 </form>
-                <div style={{width:"50vw"}}>{base64}</div>
             </div>
     )
 }
