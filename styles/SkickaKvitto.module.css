@@ -19,6 +19,7 @@
 .formStyle {
     display: flex;
     flex-direction: column;
+    max-width: 12vw;
 }
 
 .labelStyle {
@@ -39,7 +40,7 @@
 
 @media screen and (max-height: 1000px) {
     .container{
-        padding-bottom: 20vh;
+        padding-bottom: 30vh;
     }
 }
 
