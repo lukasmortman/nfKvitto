@@ -1,5 +1,7 @@
 import SkickaKvitto from "../components/SkickaKvitto";
 import Head from "next/head";
+import HeaderBild from "../components/HeaderBild";
+import adminStyles from '../styles/adminStyles.module.css'
 
 export default function Home() {
     return (
@@ -14,7 +16,11 @@ export default function Home() {
                 <link rel="manifest" href="/site.webmanifest"/>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
             </Head>
-            <SkickaKvitto/>
+            <div className={adminStyles.container}>
+                <HeaderBild />
+                <SkickaKvitto/>
+            </div>
+
         </>
     )
 }

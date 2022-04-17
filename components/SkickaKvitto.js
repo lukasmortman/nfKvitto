@@ -70,19 +70,6 @@ export default function SkickaKvitto() {
 
 
     return (
-        <div className={styles.container}>
-            <div className={styles.Text}>
-                <Image
-                    alt="nf logga"
-                    src={logo}
-                    priority={true}
-                    quality={100}
-                    layout={"responsive"}
-                    className={styles.FixaText}
-                    style={{marginTop: "1vh"}}
-                />
-                <h1 className={styles.FixaText} style={{margin: "-0.5vh"}}>nf kvitto</h1>
-            </div>
             <div className={styles.Form}>
                 <form className={styles.formStyle} onSubmit={handleSubmit}>
                     <label className={styles.labelStyle} htmlFor="vara">vara:</label>
@@ -106,6 +93,5 @@ export default function SkickaKvitto() {
                     <p style={{display: "inline-block", marginLeft: "0.5vw", fontWeight: "bold", fontSize:"0.7rem"}}>{skickat}</p>
                 </form>
             </div>
-        </div>
     )
 }

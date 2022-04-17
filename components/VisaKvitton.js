@@ -34,27 +34,13 @@ export default function VisaKvitton({data}) {
         });
     }
 
-
     return (
-        <div className={styles.container}>
-            <div className={styles.Header}>
-                <Image
-                    alt="nf logga"
-                    src={logo}
-                    priority={true}
-                    quality={100}
-                    layout={"responsive"}
-                    className={styles.FlexAndCenter}
-                    style={{marginTop: "1vh"}}
-                />
-                <h1 className={styles.FlexAndCenter} style={{margin: "-0.5vh"}}>nf kvitto</h1>
-                <span className={styles.FlexAndCenter}>
-                    <button className={styles.FlexAndCenter} onClick={()=>saveAsExcel()}>
+       <>
+            <span className={styles.FlexAndCenter}>
+                    <button className={styles.FlexAndCenter} onClick={()=> saveAsExcel()}>
                         exportera till excel
                     </button>
                 </span>
-
-            </div>
             <div className={styles.Padding1REM}>
                 {data.map(({vara, pris, datum, swish, bild}) => (
                     <div className={`${styles.parent}`} key={vara}>
@@ -72,7 +58,7 @@ export default function VisaKvitton({data}) {
                     </div>
                 ))}
             </div>
-        </div>
+        </>
     )
 
 }
