@@ -42,5 +42,8 @@
     .container{
         padding-bottom: 30vh;
     }
+    .formStyle {
+        max-width: 65vw;
+    }
 }
 
