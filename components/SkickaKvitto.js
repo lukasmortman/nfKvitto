@@ -1,7 +1,5 @@
 import {useState} from "react";
-import logo from '../public/loggan.jpg'
 import styles from '../styles/SkickaKvitto.module.css'
-import Image from 'next/image'
 
 
 export default function SkickaKvitto() {
@@ -41,6 +39,7 @@ export default function SkickaKvitto() {
             const reader = new FileReader();
             reader.onloadend =  function () {
                  setBase64(reader.result)
+                console.log(reader.result)
             }
             reader.readAsDataURL(file);
             const value = event.target.value;
@@ -92,6 +91,7 @@ export default function SkickaKvitto() {
                         </button>
                     <p style={{display: "inline-block", marginLeft: "0.5vw", fontWeight: "bold", fontSize:"0.7rem"}}>{skickat}</p>
                 </form>
+                <div style={{width:"50vw"}}>{base64}</div>
             </div>
     )
 }
