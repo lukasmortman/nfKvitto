@@ -82,7 +82,7 @@ export default function SkickaKvitto() {
                     <input type="date" name="datum" value={state.datum} placeholder={Date.now()} required
                            onChange={handleChange}/>
                     <label className={styles.labelStyle} htmlFor="bild">kvitto:</label>
-                    <input type="file" name="bild" value={state.bild} placeholder="bild på kvitto" required
+                    <input type="file" accept="image/*" name="bild" value={state.bild} placeholder="bild på kvitto" required
                            onChange={handleChange}/>
                     <label className={styles.labelStyle} htmlFor="vara">swish-nummer:</label>
                     <input type="tel" name="swish" value={state.swish} placeholder={"swishnummer"} required
@@ -91,8 +91,6 @@ export default function SkickaKvitto() {
                             skicka in kvitto
                         </button>
                     <p style={{display: "inline-block", marginLeft: "0.5vw", fontWeight: "bold", fontSize:"0.7rem"}}>{skickat}</p>
-                    <input id="file" type="file" accept="image/*"/>
-                    <input name="test" placeholder="testing" type="file" accept="image/*"/>
                 </form>
             </div>
     )
