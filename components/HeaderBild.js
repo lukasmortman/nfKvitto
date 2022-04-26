@@ -1,4 +1,3 @@
-import XlsxPopulate from "xlsx-populate";
 import styles from "../styles/VisaKvitto.module.css";
 import Image from "next/image";
 import logo from "../public/loggan.jpg";
