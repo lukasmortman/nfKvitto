@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import styles from '../styles/VisaKvitto.module.css'
 import {saveAs} from "file-saver";
+
 const ExcelJS = require('exceljs');
 const alphabetList = [
     "D",
@@ -27,10 +28,8 @@ const alphabetList = [
     "Y",
     "Z"
 ];
-
-
-
 export default function VisaKvitton({data}) {
+    data = data.sort((a, b) => a.datum - b.datum);
     async function handleExport() {
         const workbook = new ExcelJS.Workbook();
 
@@ -68,21 +67,21 @@ export default function VisaKvitton({data}) {
             {header: '', key: 'diverseKredit'},
         ];
         const fixaborders = () => {
-            sheet.getColumn("A").style= {
+            sheet.getColumnKey("datum").style = {
                 border: {
                     right: {
                         style: "thin"
-                    }
+                    },
                 }
             }
-            sheet.getColumnKey("namn").style= {
+            sheet.getColumnKey("namn").style = {
                 border: {
                     right: {
                         style: "medium"
                     }
                 }
             }
-            sheet.getColumnKey("ver").style= {
+            sheet.getColumnKey("ver").style = {
                 border: {
                     right: {
                         style: "medium"
@@ -92,7 +91,7 @@ export default function VisaKvitton({data}) {
                     }
                 }
             }
-            sheet.getColumnKey("kassaKredit").style= {
+            sheet.getColumnKey("kassaKredit").style = {
                 border: {
                     right: {
                         style: "thin"
@@ -100,77 +99,77 @@ export default function VisaKvitton({data}) {
                 },
 
             }
-            sheet.getColumnKey("bankKredit").style= {
+            sheet.getColumnKey("bankKredit").style = {
                 border: {
                     right: {
                         style: "thin"
                     }
                 }
             }
-            sheet.getColumnKey("medlemsavgifterKredit").style= {
+            sheet.getColumnKey("medlemsavgifterKredit").style = {
                 border: {
                     right: {
                         style: "thin"
                     }
                 }
             }
-            sheet.getColumnKey("bidragKredit").style= {
+            sheet.getColumnKey("bidragKredit").style = {
                 border: {
                     right: {
                         style: "thin"
                     }
                 }
             }
-            sheet.getColumnKey("laborationerKredit").style= {
+            sheet.getColumnKey("laborationerKredit").style = {
                 border: {
                     right: {
                         style: "thin"
                     }
                 }
             }
-            sheet.getColumnKey("kökKredit").style= {
+            sheet.getColumnKey("kökKredit").style = {
                 border: {
                     right: {
                         style: "thin"
                     }
                 }
             }
-            sheet.getColumnKey("försäljningKredit").style= {
+            sheet.getColumnKey("försäljningKredit").style = {
                 border: {
                     right: {
                         style: "thin"
                     }
                 }
             }
-            sheet.getColumnKey("artiklarKredit").style= {
+            sheet.getColumnKey("artiklarKredit").style = {
                 border: {
                     right: {
                         style: "thin"
                     }
                 }
             }
-            sheet.getColumnKey("skuldKredit").style= {
+            sheet.getColumnKey("skuldKredit").style = {
                 border: {
                     right: {
                         style: "thin"
                     }
                 }
             }
-            sheet.getColumnKey("övrigtKredit").style= {
+            sheet.getColumnKey("övrigtKredit").style = {
                 border: {
                     right: {
                         style: "thin"
                     }
                 }
             }
-            sheet.getColumnKey("diverseKredit").style= {
+            sheet.getColumnKey("diverseKredit").style = {
                 border: {
                     right: {
                         style: "thin"
                     }
                 }
             }
-            sheet.getColumnKey("datum").eachCell(function(cell, rowNumber) {
+            sheet.getColumnKey("datum").eachCell(function (cell, rowNumber) {
                 cell.style = {
                     border: {
                         right: {
@@ -179,7 +178,7 @@ export default function VisaKvitton({data}) {
                     }
                 }
             });
-            sheet.getColumnKey("namn").eachCell(function(cell, rowNumber) {
+            sheet.getColumnKey("namn").eachCell(function (cell, rowNumber) {
                 cell.style = {
                     border: {
                         right: {
@@ -188,7 +187,7 @@ export default function VisaKvitton({data}) {
                     }
                 }
             });
-            sheet.getColumnKey("ver").style= {
+            sheet.getColumnKey("ver").style = {
                 border: {
                     right: {
                         style: "medium"
@@ -198,7 +197,7 @@ export default function VisaKvitton({data}) {
                     }
                 }
             }
-            sheet.getColumnKey("kassaKredit").eachCell(function(cell, rowNumber) {
+            sheet.getColumnKey("kassaKredit").eachCell(function (cell, rowNumber) {
                 cell.style = {
                     border: {
                         right: {
@@ -207,7 +206,7 @@ export default function VisaKvitton({data}) {
                     }
                 }
             });
-            sheet.getColumnKey("kassaDebit").eachCell(function(cell, rowNumber) {
+            sheet.getColumnKey("kassaDebit").eachCell(function (cell, rowNumber) {
                 cell.style = {
                     border: {
                         left: {
@@ -216,7 +215,7 @@ export default function VisaKvitton({data}) {
                     }
                 }
             });
-            sheet.getColumnKey("bankKredit").eachCell(function(cell, rowNumber) {
+            sheet.getColumnKey("bankKredit").eachCell(function (cell, rowNumber) {
                 cell.style = {
                     border: {
                         right: {
@@ -225,7 +224,7 @@ export default function VisaKvitton({data}) {
                     }
                 }
             });
-            sheet.getColumnKey("medlemsavgifterKredit").eachCell(function(cell, rowNumber) {
+            sheet.getColumnKey("medlemsavgifterKredit").eachCell(function (cell, rowNumber) {
                 cell.style = {
                     border: {
                         right: {
@@ -234,7 +233,7 @@ export default function VisaKvitton({data}) {
                     }
                 }
             });
-            sheet.getColumnKey("bidragKredit").eachCell(function(cell, rowNumber) {
+            sheet.getColumnKey("bidragKredit").eachCell(function (cell, rowNumber) {
                 cell.style = {
                     border: {
                         right: {
@@ -243,7 +242,7 @@ export default function VisaKvitton({data}) {
                     }
                 }
             });
-            sheet.getColumnKey("laborationerKredit").eachCell(function(cell, rowNumber) {
+            sheet.getColumnKey("laborationerKredit").eachCell(function (cell, rowNumber) {
                 cell.style = {
                     border: {
                         right: {
@@ -252,7 +251,7 @@ export default function VisaKvitton({data}) {
                     }
                 }
             });
-            sheet.getColumnKey("kökKredit").eachCell(function(cell, rowNumber) {
+            sheet.getColumnKey("kökKredit").eachCell(function (cell, rowNumber) {
                 cell.style = {
                     border: {
                         right: {
@@ -261,7 +260,7 @@ export default function VisaKvitton({data}) {
                     }
                 }
             });
-            sheet.getColumnKey("försäljningKredit").eachCell(function(cell, rowNumber) {
+            sheet.getColumnKey("försäljningKredit").eachCell(function (cell, rowNumber) {
                 cell.style = {
                     border: {
                         right: {
@@ -270,7 +269,7 @@ export default function VisaKvitton({data}) {
                     }
                 }
             });
-            sheet.getColumnKey("artiklarKredit").eachCell(function(cell, rowNumber) {
+            sheet.getColumnKey("artiklarKredit").eachCell(function (cell, rowNumber) {
                 cell.style = {
                     border: {
                         right: {
@@ -279,7 +278,7 @@ export default function VisaKvitton({data}) {
                     }
                 }
             });
-            sheet.getColumnKey("skuldKredit").eachCell(function(cell, rowNumber) {
+            sheet.getColumnKey("skuldKredit").eachCell(function (cell) {
                 cell.style = {
                     border: {
                         right: {
@@ -288,7 +287,7 @@ export default function VisaKvitton({data}) {
                     }
                 }
             });
-            sheet.getColumnKey("övrigtKredit").eachCell(function(cell, rowNumber) {
+            sheet.getColumnKey("övrigtKredit").eachCell(function (cell, rowNumber) {
                 cell.style = {
                     border: {
                         right: {
@@ -297,7 +296,7 @@ export default function VisaKvitton({data}) {
                     }
                 }
             });
-            sheet.getColumnKey("diverseKredit").eachCell(function(cell, rowNumber) {
+            sheet.getColumnKey("diverseKredit").eachCell(function (cell, rowNumber) {
                 cell.style = {
                     border: {
                         right: {
@@ -324,7 +323,36 @@ export default function VisaKvitton({data}) {
                     bgColor: {argb: 'BDD7EE'}
                 }
             }
+            sheet.getCell("A2").style = {
+                border: {
+                    bottom: {
+                        style: "thin"
+                    },
+                    right: {
+                        style: "thin"
+                    }
+                }
+            }
+            sheet.getCell("B2").style = {
+                border: {
+                    bottom: {
+                        style: "thin"
+                    },right: {
+                        style: "medium"
+                    },
+                    left: {
+                        style: "thin"
+                    }
+                }
+            }
             sheet.getCell("C2").style = {
+                border: {
+                    bottom: {
+                        style: "thin"
+                    },right: {
+                        style: "medium"
+                    }
+                },
                 fill: {
                     type: "pattern",
                     pattern: "solid",
@@ -358,14 +386,18 @@ export default function VisaKvitton({data}) {
             diverseDebit: "Debit",
             diverseKredit: "Kredit"
         })
-        data.forEach((item,i) => {
+        data.forEach((item, i) => {
             let datums = new Date(item.datum);
             let priset = Number(item.pris)
-            sheet.addRow({kassaDebit: priset, ver: i+1, namn: item.vara, datum: datums});
+            sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums});
+            sheet.getCell(`B${i+3}`).value = {
+                hyperlink: item.bild,
+                text: item.vara
+            }
         });
         fixaborders()
-        for(let i = 0; i<11; i++){
-            sheet.getCell(`${alphabetList[(i*2)+1]}2`).style = {
+        for (let i = 0; i < 11; i++) {
+            sheet.getCell(`${alphabetList[(i * 2) + 1]}2`).style = {
                 fill: {
                     type: 'pattern',
                     pattern: 'solid',
@@ -376,13 +408,16 @@ export default function VisaKvitton({data}) {
                     color: {argb: "9C0006"}
                 },
                 border: {
+                    bottom: {
+                        style: "thin"
+                    },
                     right: {
                         style: "thin"
                     }
                 }
             }
-            if(`${alphabetList[(i*2)]}` === "D"){
-                sheet.getCell(`${alphabetList[(i*2)]}2`).style= {
+            if (`${alphabetList[(i * 2)]}` === "D") {
+                sheet.getCell(`${alphabetList[(i * 2)]}2`).style = {
                     fill: {
                         type: 'pattern',
                         pattern: 'solid',
@@ -395,12 +430,14 @@ export default function VisaKvitton({data}) {
                     border: {
                         left: {
                             style: "medium"
+                        }, bottom: {
+                            style: "thin"
                         }
 
                     }
                 }
-            }else{
-                sheet.getCell(`${alphabetList[(i*2)]}2`).style= {
+            } else {
+                sheet.getCell(`${alphabetList[(i * 2)]}2`).style = {
                     fill: {
                         type: 'pattern',
                         pattern: 'solid',
@@ -409,6 +446,11 @@ export default function VisaKvitton({data}) {
                     },
                     font: {
                         color: {argb: "006100"}
+                    },
+                    border: {
+                        bottom: {
+                            style: "thin"
+                        }
                     }
                 }
             }
@@ -416,7 +458,7 @@ export default function VisaKvitton({data}) {
         const autoWidth = (worksheet, minimalWidth = 10) => {
             worksheet.columns.forEach((column) => {
                 let maxColumnLength = 0;
-                column.eachCell({ includeEmpty: true }, (cell) => {
+                column.eachCell({includeEmpty: true}, (cell) => {
                     maxColumnLength = Math.max(
                         maxColumnLength,
                         minimalWidth,
@@ -424,9 +466,10 @@ export default function VisaKvitton({data}) {
                     );
                 });
                 column.width = maxColumnLength + 2;
+                column.alignment = {horizontal: "left"}
             });
         };
-        autoWidth(sheet,6)
+        autoWidth(sheet, 6)
         sheet.getColumnKey("datum").width = 18
         sheet.getColumnKey("ver").width = 5
         fixadatavisare()
