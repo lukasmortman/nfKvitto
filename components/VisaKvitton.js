@@ -497,7 +497,7 @@ export default function VisaKvitton({data}) {
                         </div>
                         <div className={styles.div1}><p>namn på vara: {vara} </p>
                         </div>
-                        <div className={styles.div2}><p>pris på vara: {pris}</p>
+                        <div className={styles.div2}><p>pris på vara: {pris}kr</p>
                         </div>
                         <div className={styles.div3}><p>datum köpt: {datum}</p>
                         </div>

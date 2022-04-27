@@ -102,10 +102,10 @@ export default function SkickaKvitto() {
             <div className={styles.Form}>
                 <form className={styles.formStyle} onSubmit={handleSubmit}>
                     <label className={styles.labelStyle} htmlFor="vara">vara:</label>
-                    <input type="text" name="vara" placeholder="varunamn" value={state.vara} required
+                    <input type="text" name="vara" placeholder="namn på vara" value={state.vara} required
                            onChange={handleChange}/>
                     <label className={styles.labelStyle} htmlFor="pris">pris:</label>
-                    <input type="number" name="pris" placeholder="pris" value={state.pris} required
+                    <input type="number" name="pris" placeholder="pris (skriv inte kr)" value={state.pris} required
                            onChange={handleChange}/>
                     <label className={styles.labelStyle} htmlFor="datum">datum:</label>
                     <input type="date" name="datum" value={state.datum} placeholder={Date.now()} required
