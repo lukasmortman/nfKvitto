@@ -389,7 +389,7 @@ export default function VisaKvitton({data}) {
         data.forEach((item, i) => {
             let datums = new Date(item.datum);
             let priset = Number(item.pris)
-            sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums});
+            sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums});
             sheet.getCell(`B${i+3}`).value = {
                 hyperlink: item.bild,
                 text: item.vara
