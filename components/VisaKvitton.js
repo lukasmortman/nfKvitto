@@ -96,10 +96,7 @@ export default function VisaKvitton({data}) {
                     right: {
                         style: "thin"
                     }
-                    ,
-                    left: {
-                        style: none
-                    }
+           
                 },
 
             }
@@ -108,9 +105,7 @@ export default function VisaKvitton({data}) {
                     right: {
                         style: "thin"
                     },
-                    left: {
-                        style: none
-                    }
+                   
                 }
             }
             sheet.getColumnKey("medlemsavgifterKredit").style = {
@@ -118,9 +113,7 @@ export default function VisaKvitton({data}) {
                     right: {
                         style: "thin"
                     },
-                    left: {
-                        style: none
-                    }
+                   
                 }
             }
             sheet.getColumnKey("bidragKredit").style = {
