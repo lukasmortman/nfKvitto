@@ -95,7 +95,11 @@ export default function VisaKvitton({data}) {
                 border: {
                     right: {
                         style: "thin"
-                    },
+                    }
+                    ,
+                    left: {
+                        style: none
+                    }
                 },
 
             }
@@ -103,6 +107,9 @@ export default function VisaKvitton({data}) {
                 border: {
                     right: {
                         style: "thin"
+                    },
+                    left: {
+                        style: none
                     }
                 }
             }
@@ -110,6 +117,9 @@ export default function VisaKvitton({data}) {
                 border: {
                     right: {
                         style: "thin"
+                    },
+                    left: {
+                        style: none
                     }
                 }
             }
