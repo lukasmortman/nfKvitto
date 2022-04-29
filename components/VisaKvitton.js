@@ -314,7 +314,7 @@ export default function VisaKvitton({data}) {
                 horizontal: "left"
             }
             sheet.getColumnKey("datum").numFmt = "[$-x-sysdate]DDDD, MMMM DD, aaaa"
-            sheet.getColumnKey("kassaDebit").numFmt = "###0k\\r;-###0k\\r"
+            sheet.getColumnKey("kassaKredit").numFmt = "###0k\\r;-###0k\\r"
             sheet.getCell("C1").style = {
                 fill: {
                     type: "pattern",
