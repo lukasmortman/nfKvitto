@@ -26,6 +26,7 @@ const alphabetList = [
     "W",
     "X",
     "Y",
+    "Z",
     "Z"
 ];
 export default function VisaKvitton({data}) {
@@ -35,8 +36,6 @@ export default function VisaKvitton({data}) {
 
         workbook.creator = 'Lukas Mörtman';
         workbook.created = new Date();
-        workbook.properties.date1904 = true;
-        workbook.calcProperties.fullCalcOnLoad = true;
 
         const sheet = workbook.addWorksheet(new Date().getFullYear().toString());
         sheet.columns = [
@@ -67,6 +66,31 @@ export default function VisaKvitton({data}) {
             {header: '', key: 'diverseKredit'},
         ];
         const fixaborders = () => {
+            for (let i = 0; i < 11; i++) {
+                sheet.getColumn(`${alphabetList[(i * 2) + 2]}`).style = {
+                    border: {
+                        left: {
+                            style: "thin"
+                        },
+                    },
+                }
+                sheet.getColumn(`${alphabetList[(i * 2) + 2]}`).eachCell(function (cell, rowNumber) {
+                    cell.style = {
+                        border: {
+                            left: {
+                                style: "thin"
+                            },
+                        }
+                    };
+
+                })
+                sheet.getColumn(`${alphabetList[(i)]}`).eachCell(function (cell, rowNumber) {
+                    cell.alignment = {
+                        horizontal: "left"
+                    }
+
+                })
+            }
             sheet.getColumnKey("datum").style = {
                 border: {
                     right: {
@@ -91,231 +115,32 @@ export default function VisaKvitton({data}) {
                     }
                 }
             }
-            sheet.getColumnKey("kassaKredit").style = {
-                border: {
-                    right: {
-                        style: "thin"
-                    }
-
-                },
-
-            }
-            sheet.getColumnKey("bankKredit").style = {
-                border: {
-                    right: {
-                        style: "thin"
-                    },
-
-                }
-            }
-            sheet.getColumnKey("medlemsavgifterKredit").style = {
-                border: {
-                    right: {
-                        style: "thin"
-                    },
-
-                }
-            }
-            sheet.getColumnKey("bidragKredit").style = {
-                border: {
-                    right: {
-                        style: "thin"
-                    }
-                }
-            }
-            sheet.getColumnKey("laborationerKredit").style = {
-                border: {
-                    right: {
-                        style: "thin"
-                    }
-                }
-            }
-            sheet.getColumnKey("kökKredit").style = {
-                border: {
-                    right: {
-                        style: "thin"
-                    }
-                }
-            }
-            sheet.getColumnKey("försäljningKredit").style = {
-                border: {
-                    right: {
-                        style: "thin"
-                    }
-                }
-            }
-            sheet.getColumnKey("artiklarKredit").style = {
-                border: {
-                    right: {
-                        style: "thin"
-                    }
-                }
-            }
-            sheet.getColumnKey("skuldKredit").style = {
-                border: {
-                    right: {
-                        style: "thin"
-                    }
-                }
-            }
-            sheet.getColumnKey("övrigtKredit").style = {
-                border: {
-                    right: {
-                        style: "thin"
-                    }
-                }
-            }
-            sheet.getColumnKey("diverseKredit").style = {
-                border: {
-                    right: {
-                        style: "thin"
-                    }
-                }
-            }
-            sheet.getColumnKey("datum").eachCell(function (cell, rowNumber) {
-                cell.style = {
-                    border: {
-                        right: {
-                            style: "thin"
-                        }
-                    }
-                }
-            });
             sheet.getColumnKey("namn").eachCell(function (cell, rowNumber) {
                 cell.style = {
                     border: {
                         right: {
                             style: "medium"
+                        },
+                        left: {
+                            style: "thin"
                         }
                     }
                 }
             });
-            sheet.getColumnKey("ver").style = {
-                border: {
-                    right: {
-                        style: "medium"
-                    },
-                    left: {
-                        style: "medium"
-                    }
-                }
-            }
-            sheet.getColumnKey("kassaKredit").eachCell(function (cell, rowNumber) {
+            sheet.getColumnKey("ver").eachCell(function (cell, rowNumber) {
                 cell.style = {
                     border: {
                         right: {
-                            style: "thin"
-                        },
-                    }
-                }
-            });
-            sheet.getColumnKey("kassaDebit").eachCell(function (cell, rowNumber) {
-                cell.style = {
-                    border: {
-                        left: {
                             style: "medium"
                         },
-                    }
-                }
-            });
-            sheet.getColumnKey("bankKredit").eachCell(function (cell, rowNumber) {
-                cell.style = {
-                    border: {
-                        right: {
-                            style: "thin"
-                        }
-                    }
-                }
-            });
-            sheet.getColumnKey("medlemsavgifterKredit").eachCell(function (cell, rowNumber) {
-                cell.style = {
-                    border: {
-                        right: {
-                            style: "thin"
-                        }
-                    }
-                }
-            });
-            sheet.getColumnKey("bidragKredit").eachCell(function (cell, rowNumber) {
-                cell.style = {
-                    border: {
-                        right: {
-                            style: "thin"
-                        }
-                    }
-                }
-            });
-            sheet.getColumnKey("laborationerKredit").eachCell(function (cell, rowNumber) {
-                cell.style = {
-                    border: {
-                        right: {
-                            style: "thin"
-                        }
-                    }
-                }
-            });
-            sheet.getColumnKey("kökKredit").eachCell(function (cell, rowNumber) {
-                cell.style = {
-                    border: {
-                        right: {
-                            style: "thin"
-                        }
-                    }
-                }
-            });
-            sheet.getColumnKey("försäljningKredit").eachCell(function (cell, rowNumber) {
-                cell.style = {
-                    border: {
-                        right: {
-                            style: "thin"
-                        }
-                    }
-                }
-            });
-            sheet.getColumnKey("artiklarKredit").eachCell(function (cell, rowNumber) {
-                cell.style = {
-                    border: {
-                        right: {
-                            style: "thin"
-                        }
-                    }
-                }
-            });
-            sheet.getColumnKey("skuldKredit").eachCell(function (cell) {
-                cell.style = {
-                    border: {
-                        right: {
-                            style: "thin"
-                        }
-                    }
-                }
-            });
-            sheet.getColumnKey("övrigtKredit").eachCell(function (cell, rowNumber) {
-                cell.style = {
-                    border: {
-                        right: {
-                            style: "thin"
-                        }
-                    }
-                }
-            });
-            sheet.getColumnKey("diverseKredit").eachCell(function (cell, rowNumber) {
-                cell.style = {
-                    border: {
-                        right: {
-                            style: "thin"
+                        left: {
+                            style: "medium"
                         }
                     }
                 }
             });
         }
         const fixadatavisare = () => {
-            sheet.getColumnKey("ver").alignment = {
-                horizontal: "center"
-            }
-            sheet.getColumnKey("datum").alignment = {
-                horizontal: "left"
-            }
             sheet.getColumnKey("datum").numFmt = "[$-x-sysdate]DDDD, MMMM DD, aaaa"
             sheet.getColumnKey("kassaKredit").numFmt = "###0k\\r;-###0k\\r"
             sheet.getCell("C1").style = {
@@ -324,7 +149,8 @@ export default function VisaKvitton({data}) {
                     pattern: "solid",
                     fgColor: {argb: 'BDD7EE'},
                     bgColor: {argb: 'BDD7EE'}
-                }
+                },
+                alignment: {horizontal: "center"}
             }
             sheet.getCell("A2").style = {
                 border: {
@@ -361,7 +187,8 @@ export default function VisaKvitton({data}) {
                     pattern: "solid",
                     fgColor: {argb: 'BDD7EE'},
                     bgColor: {argb: 'BDD7EE'}
-                }
+                },
+                alignment: {horizontal: "center"}
             }
         }
         sheet.addRow({
@@ -389,7 +216,8 @@ export default function VisaKvitton({data}) {
             diverseDebit: "Debit",
             diverseKredit: "Kredit"
         })
-        data.forEach((item, i) => {
+        let exceldata = data.sort((a, b) =>  new Date(a.datum) - new Date(b.datum));
+        exceldata.forEach((item, i) => {
             let datums = new Date(item.datum);
             let priset = Number(item.pris)
             sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums});
@@ -458,28 +286,16 @@ export default function VisaKvitton({data}) {
                 }
             }
         }
-        const autoWidth = (worksheet, minimalWidth = 10) => {
-            worksheet.columns.forEach((column) => {
-                let maxColumnLength = 0;
-                column.eachCell({includeEmpty: true}, (cell) => {
-                    maxColumnLength = Math.max(
-                        maxColumnLength,
-                        minimalWidth,
-                        cell.value ? cell.value.toString().length : 0
-                    );
-                });
-                column.width = maxColumnLength + 2;
-                column.alignment = {horizontal: "left"}
-            });
-        };
-        autoWidth(sheet, 6)
         sheet.getColumnKey("datum").width = 18
         sheet.getColumnKey("ver").width = 5
+        sheet.getColumnKey("namn").width = 25
+        sheet.getColumnKey("ver").alignment = {horizontal: "center"}
+        sheet.getColumnKey("datum").alignment = {horizontal: "left"}
         fixadatavisare()
         workbook.xlsx.writeBuffer().then(function (buffer) {
             saveAs(
                 new Blob([buffer], {type: "application/octet-stream"}),
-                `Bokföring NF.xlsx`
+                `Bokföring NF ${new Date().toLocaleDateString()}.xlsx`
             );
         });
     }
