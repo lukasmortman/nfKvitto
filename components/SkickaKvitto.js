@@ -12,6 +12,7 @@ export default function SkickaKvitto() {
         datum: "",
         bild: "",
         swish: "",
+        kategori: "",
     })
     const [skickat, setSkickat] = useState("")
     const [base64, setBase64] = useState("")
@@ -19,13 +20,14 @@ export default function SkickaKvitto() {
 
     const handleSubmit = event => {
         event.preventDefault();
-        postData({vara:state.vara,pris:state.pris,datum:state.datum,bild:base64,swish:state.swish})
+        postData({vara:state.vara,pris:state.pris,kategori: state.kategori,datum:state.datum,bild:base64,swish:state.swish})
         setState({
             vara: "",
             pris: "",
             datum: "",
             bild: "",
-            swish: ""
+            swish: "",
+            kategori: "",
         })
         setBase64("")
         setSkickat("Kvitto inskickat")
@@ -85,7 +87,7 @@ export default function SkickaKvitto() {
             try {
                 const res = await fetch('/api/SkickaData', {
                     method: 'POST',
-                    body: JSON.stringify({vara:state.vara,pris:state.pris,datum:state.datum,bild:downloadURL,swish:state.swish}),
+                    body: JSON.stringify({vara:state.vara,pris:state.pris,kategori: state.kategori,datum:state.datum,bild:downloadURL,swish:state.swish}),
                 });
             } catch (error) {
                 console.log("error", error)
@@ -110,6 +112,11 @@ export default function SkickaKvitto() {
                     <label className={styles.labelStyle} htmlFor="datum">datum:</label>
                     <input type="date" name="datum" value={state.datum} placeholder={Date.now()} required
                            onChange={handleChange}/>
+                    <label className={styles.labelStyle} htmlFor="kategori">kategori på köp:</label>
+                    <select className={styles.kategori} name="kategori" id="kategori" onChange={handleChange}>
+                        <option value="Laborationer">Laborationer</option>
+                        <option value="Kök&fester">Kök & fester</option>
+                    </select>
                     <label className={styles.labelStyle} htmlFor="bild">kvitto:</label>
                     <input type="file" accept="image/*" name="bild" value={state.bild} placeholder="bild på kvitto" required
                            onChange={handleChange}/>

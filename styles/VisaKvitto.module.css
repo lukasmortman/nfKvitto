@@ -42,7 +42,8 @@
 .div2 { grid-area: 2 / 2 / 3 / 3; align-self: center; justify-content: center;}
 .div3 { grid-area: 3 / 2 / 4 / 3; align-self: center; justify-content: center;}
 .div4 { grid-area: 4 / 2 / 5 / 3; align-self: center; justify-content: center;}
-.div5 { grid-area: 1 / 1 / 5 / 2; align-self: center; margin-right: 1rem; justify-content: center;}
+.div5 { grid-area: 5 / 2 / 6 / 3; align-self: center; justify-content: center;}
+.div6 { grid-area: 1 / 1 / 6 / 2; align-self: center; margin-right: 1rem; justify-content: center;}
 
 @media screen and (max-height: 1000px) {
     .container{

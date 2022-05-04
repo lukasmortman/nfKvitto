@@ -143,6 +143,8 @@ export default function VisaKvitton({data}) {
         const fixadatavisare = () => {
             sheet.getColumnKey("datum").numFmt = "[$-x-sysdate]DDDD, MMMM DD, aaaa"
             sheet.getColumnKey("kassaKredit").numFmt = "###0k\\r;-###0k\\r"
+            sheet.getColumnKey("laborationerDebit").numFmt = "###0k\\r;-###0k\\r"
+            sheet.getColumnKey("kökDebit").numFmt = "###0k\\r;-###0k\\r"
             sheet.getCell("C1").style = {
                 fill: {
                     type: "pattern",
@@ -220,7 +222,11 @@ export default function VisaKvitton({data}) {
         exceldata.forEach((item, i) => {
             let datums = new Date(item.datum);
             let priset = Number(item.pris)
-            sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums});
+            if(item.kategori === "Kök&fester"){
+                sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums,kökDebit:priset });
+            }else if(item.kategori === "Laborationer"){
+                sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums,laborationerDebit:priset });
+            }
             sheet.getCell(`B${i+3}`).value = {
                 hyperlink: item.bild,
                 text: item.vara
@@ -309,18 +315,20 @@ export default function VisaKvitton({data}) {
                     </button>
                 </span>
             <div className={styles.Padding1REM}>
-                {data.map(({vara, pris, datum, swish, bild}) => (
+                {data.map(({vara, pris,kategori, datum, swish, bild}) => (
                     <div className={`${styles.parent}`} key={vara}>
-                        <div className={styles.div5}>
+                        <div className={styles.div6}>
                             <Image src={bild} alt={"bild på kvittot"} height={80} width={80}/>
                         </div>
                         <div className={styles.div1}><p>namn på vara: {vara} </p>
                         </div>
                         <div className={styles.div2}><p>pris på vara: {pris}kr</p>
                         </div>
-                        <div className={styles.div3}><p>datum köpt: {datum}</p>
+                        <div className={styles.div3}><p>kategori på köp: {kategori}</p>
                         </div>
-                        <div className={styles.div4}><p>swishnummer: {swish}</p>
+                        <div className={styles.div4}><p>datum köpt: {datum}</p>
+                        </div>
+                        <div className={styles.div5}><p>swishnummer: {swish}</p>
                         </div>
                     </div>
                 ))}
