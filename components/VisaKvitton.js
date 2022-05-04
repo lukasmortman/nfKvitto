@@ -29,7 +29,7 @@ const alphabetList = [
     "Z"
 ];
 export default function VisaKvitton({data}) {
-    data = data.sort((a, b) => a.datum - b.datum);
+    data = data.sort((a, b) =>  new Date(b.datum) - new Date(a.datum));
     async function handleExport() {
         const workbook = new ExcelJS.Workbook();
 
@@ -96,7 +96,7 @@ export default function VisaKvitton({data}) {
                     right: {
                         style: "thin"
                     }
-           
+
                 },
 
             }
@@ -105,7 +105,7 @@ export default function VisaKvitton({data}) {
                     right: {
                         style: "thin"
                     },
-                   
+
                 }
             }
             sheet.getColumnKey("medlemsavgifterKredit").style = {
@@ -113,7 +113,7 @@ export default function VisaKvitton({data}) {
                     right: {
                         style: "thin"
                     },
-                   
+
                 }
             }
             sheet.getColumnKey("bidragKredit").style = {
