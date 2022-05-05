@@ -127,6 +127,22 @@ export default function VisaKvitton({data}) {
                     }
                 }
             });
+            sheet.getColumn("D").style = {
+                border: {
+                    left: {
+                        style: "medium"
+                    }
+                }
+            }
+            sheet.getColumn("D").eachCell(function (cell, rowNumber) {
+                cell.style = {
+                    border: {
+                        left: {
+                            style: "medium"
+                        }
+                    }
+                }
+            });
             sheet.getColumnKey("ver").eachCell(function (cell, rowNumber) {
                 cell.style = {
                     border: {
