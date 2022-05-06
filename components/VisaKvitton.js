@@ -242,6 +242,8 @@ export default function VisaKvitton({data}) {
                 sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums,kökDebit:priset });
             }else if(item.kategori === "Laborationer"){
                 sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums,laborationerDebit:priset });
+            }else if(item.kategori === "Övrigt") {
+                sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums, övrigtDebit: priset});
             }
             sheet.getCell(`B${i+3}`).value = {
                 hyperlink: item.bild,

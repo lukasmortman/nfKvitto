@@ -116,6 +116,7 @@ export default function SkickaKvitto() {
                     <select className={styles.kategori} name="kategori" id="kategori" onChange={handleChange}>
                         <option value="Laborationer">Laborationer</option>
                         <option value="Kök&fester">Kök & fester</option>
+                        <option value="Övrigt">Övrigt</option>
                     </select>
                     <label className={styles.labelStyle} htmlFor="bild">kvitto:</label>
                     <input type="file" accept="image/*" name="bild" value={state.bild} placeholder="bild på kvitto" required
