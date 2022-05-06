@@ -19,11 +19,11 @@
 .formStyle {
     display: flex;
     flex-direction: column;
-    max-width: 12vw;
+    max-width: 62vw;
 }
 .kategori {
     min-width: 100px;
-    max-width: 8vw;
+    max-width: 6vw;
 }
 
 .labelStyle {
@@ -45,12 +45,6 @@
 @media screen and (max-width: 800px) {
     .container{
         padding-bottom: 30vh;
-    }
-    .formStyle {
-        max-width: 62vw;
-    }
-    .kategori {
-        max-width: 15vw;
     }
 }
 
