@@ -85,10 +85,17 @@ export default function SkickaKvitto() {
         }).then(async downloadURL => {
             bildurl = downloadURL
             try {
-                const res = await fetch('/api/SkickaData', {
-                    method: 'POST',
-                    body: JSON.stringify({vara:state.vara,pris:state.pris,kategori: state.kategori,datum:state.datum,bild:downloadURL,swish:state.swish}),
-                });
+                if(state.kategori===""){
+                    const res = await fetch('/api/SkickaData', {
+                        method: 'POST',
+                        body: JSON.stringify({vara:state.vara,pris:state.pris,kategori: "Övrigt",datum:state.datum,bild:downloadURL,swish:state.swish}),
+                    });
+                }else{
+                    const res = await fetch('/api/SkickaData', {
+                        method: 'POST',
+                        body: JSON.stringify({vara:state.vara,pris:state.pris,kategori: state.kategori,datum:state.datum,bild:downloadURL,swish:state.swish}),
+                    });
+                }
             } catch (error) {
                 console.log("error", error)
             }
