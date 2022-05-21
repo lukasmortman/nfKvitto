@@ -88,12 +88,12 @@ export default function SkickaKvitto() {
                 if(state.kategori===""){
                     const res = await fetch('/api/SkickaData', {
                         method: 'POST',
-                        body: JSON.stringify({vara:state.vara,pris:state.pris,kategori: "Laborationer",datum:state.datum,bild:downloadURL,swish:state.swish}),
+                        body: JSON.stringify({vara:state.vara,pris:Math.round(state.pris),kategori: "Laborationer",datum:state.datum,bild:downloadURL,swish:state.swish}),
                     });
                 }else{
                     const res = await fetch('/api/SkickaData', {
                         method: 'POST',
-                        body: JSON.stringify({vara:state.vara,pris:state.pris,kategori: state.kategori,datum:state.datum,bild:downloadURL,swish:state.swish}),
+                        body: JSON.stringify({vara:state.vara,pris:Math.round(state.pris),kategori: state.kategori,datum:state.datum,bild:downloadURL,swish:state.swish}),
                     });
                 }
             } catch (error) {
