@@ -1,8 +1,8 @@
 import { MongoClient } from 'mongodb'
 
 
-const MONGODB_URI = "mongodb+srv://admin:halods1234@kvittodatabas.iivvn.mongodb.net/information?retryWrites=true&w=majority"
-const MONGODB_DB = "information"
+const MONGODB_URI = process.env.MONGODB_URI
+const MONGODB_DB = process.env.MONGODB_DB
 
 if (!MONGODB_URI) {
     throw new Error(
