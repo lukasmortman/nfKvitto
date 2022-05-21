@@ -85,17 +85,10 @@ export default function SkickaKvitto() {
         }).then(async downloadURL => {
             bildurl = downloadURL
             try {
-                if(state.kategori===""){
-                    const res = await fetch('/api/SkickaData', {
-                        method: 'POST',
-                        body: JSON.stringify({vara:state.vara,pris:state.pris,kategori: "Övrigt",datum:state.datum,bild:downloadURL,swish:state.swish}),
-                    });
-                }else{
                     const res = await fetch('/api/SkickaData', {
                         method: 'POST',
                         body: JSON.stringify({vara:state.vara,pris:state.pris,kategori: state.kategori,datum:state.datum,bild:downloadURL,swish:state.swish}),
                     });
-                }
             } catch (error) {
                 console.log("error", error)
             }
@@ -120,7 +113,7 @@ export default function SkickaKvitto() {
                     <input type="date" name="datum" value={state.datum} placeholder={Date.now()} required
                            onChange={handleChange}/>
                     <label className={styles.labelStyle} htmlFor="kategori">kategori på köp:</label>
-                    <select className={styles.kategori} name="kategori" id="kategori" onChange={handleChange}>
+                    <select className={styles.kategori} name="kategori" id="kategori" required onChange={handleChange}>
                         <option value="Laborationer">Laborationer</option>
                         <option value="Kök&fester">Kök & fester</option>
                         <option value="Övrigt">Övrigt</option>
