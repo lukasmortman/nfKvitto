@@ -67,13 +67,13 @@ export default function SkickaKvitto() {
         console.log("sending")
         let bildurl;
         const firebaseConfig = {
-            apiKey: process.env.NEXT_PUBLIC_apiKey,
-            authDomain: process.env.NEXT_PUBLIC_authDomain,
-            projectId: process.env.NEXT_PUBLIC_projectId,
-            storageBucket: process.env.NEXT_PUBLIC_storageBucket,
-            messagingSenderId: process.env.NEXT_PUBLIC_messagingSenderId,
-            appId: process.env.NEXT_PUBLIC_appId,
-            measurementId: process.env.NEXT_PUBLIC_measurementId
+            apiKey: "AIzaSyC3Okk1Aa2n5P_4ovSGoqwH7Q5cfjZO_l4",
+            authDomain: "nfkvitton.firebaseapp.com",
+            projectId: "nfkvitton",
+            storageBucket: "nfkvitton.appspot.com",
+            messagingSenderId: "773494506675",
+            appId: "1:773494506675:web:82c77ade0673e7cc651cc6",
+            measurementId: "G-8YPG6B5MDF"
         };
         const firebaseApp = initializeApp(firebaseConfig);
         const storage = getStorage(firebaseApp)
