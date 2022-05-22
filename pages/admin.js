@@ -1,5 +1,6 @@
 import VisaKvitton from "../components/VisaKvitton";
 import Head from "next/head";
+import {Html} from "next/document";
 import {connectToDatabase} from "../utils/mongodb";
 import HeaderBild from "../components/HeaderBild";
 import adminStyles from '../styles/adminStyles.module.css'

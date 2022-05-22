@@ -1,5 +1,6 @@
 import SkickaKvitto from "../components/SkickaKvitto";
 import Head from "next/head";
+import {Html} from "next/document";
 import HeaderBild from "../components/HeaderBild";
 import adminStyles from '../styles/adminStyles.module.css'
 
