@@ -6,7 +6,7 @@ import adminStyles from '../styles/adminStyles.module.css'
 
 export default function Home({data}) {
     return (
-        <>
+        <Html lang="se">
             <Head>
                 <title>NF Kvitton Admin Page</title>
                 <meta name="description"
@@ -21,7 +21,7 @@ export default function Home({data}) {
                 <HeaderBild />
                 <VisaKvitton data={data}/>
             </div>
-        </>
+        </Html>
     )
 }
 export async function getServerSideProps() {
