@@ -24,7 +24,7 @@
 }
 .kategori {
     min-width: 100px;
-    max-width: 7vw;
+    max-width: 6vw;
 }
 
 .labelStyle {
@@ -46,6 +46,9 @@
 @media screen and (max-width: 800px) {
     .container{
         padding-bottom: 30vh;
+    }
+    .kategori {
+        max-width: fit-content;
     }
 }
 
