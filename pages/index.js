@@ -1,12 +1,11 @@
 import SkickaKvitto from "../components/SkickaKvitto";
 import Head from "next/head";
-import {Html} from "next/document";
 import HeaderBild from "../components/HeaderBild";
 import adminStyles from '../styles/adminStyles.module.css'
 
 export default function Home() {
     return (
-        <Html lang="se">
+        <>
             <Head>
                 <title>NF Kvitton</title>
                 <meta name="description"
@@ -22,6 +21,6 @@ export default function Home() {
                 <SkickaKvitto/>
             </div>
 
-        </Html>
+        </>
     )
 }

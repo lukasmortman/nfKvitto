@@ -1,13 +1,12 @@
 import VisaKvitton from "../components/VisaKvitton";
 import Head from "next/head";
-import {Html} from "next/document";
 import {connectToDatabase} from "../utils/mongodb";
 import HeaderBild from "../components/HeaderBild";
 import adminStyles from '../styles/adminStyles.module.css'
 
 export default function Home({data}) {
     return (
-        <Html lang="se">
+        <>
             <Head>
                 <title>NF Kvitton Admin Page</title>
                 <meta name="description"
@@ -22,7 +21,7 @@ export default function Home({data}) {
                 <HeaderBild />
                 <VisaKvitton data={data}/>
             </div>
-        </Html>
+        </>
     )
 }
 export async function getServerSideProps() {
