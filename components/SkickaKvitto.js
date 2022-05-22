@@ -45,7 +45,6 @@ export default function SkickaKvitto() {
             const reader = new FileReader();
             reader.onloadend =  function () {
                  setBase64(reader.result)
-                console.log(reader.result)
             }
             reader.readAsDataURL(file);
             const value = event.target.value;
