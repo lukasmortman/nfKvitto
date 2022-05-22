@@ -338,7 +338,7 @@ export default function VisaKvitton({data}) {
                         <div className={styles.div6}>
                             <Image src={bild} alt={"bild på kvittot"} height={80} width={80}/>
                         </div>
-                        <div className={styles.div1}><p className={styles.fitText}>namn på vara: {vara} </p>
+                        <div className={styles.div1}><p className={styles.fitText}>namn på vara: {vara.slice(0,16)} </p>
                         </div>
                         <div className={styles.div2}><p className={styles.fitText}>pris på vara: {pris}kr</p>
                         </div>
