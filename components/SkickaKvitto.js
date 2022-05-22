@@ -67,13 +67,13 @@ export default function SkickaKvitto() {
         console.log("sending")
         let bildurl;
         const firebaseConfig = {
-            apiKey: "AIzaSyC3Okk1Aa2n5P_4ovSGoqwH7Q5cfjZO_l4",
-            authDomain: "nfkvitton.firebaseapp.com",
-            projectId: "nfkvitton",
-            storageBucket: "nfkvitton.appspot.com",
-            messagingSenderId: "773494506675",
-            appId: "1:773494506675:web:82c77ade0673e7cc651cc6",
-            measurementId: "G-8YPG6B5MDF"
+            apiKey: process.env.NEXT_PUBLIC_apiKey,
+            authDomain: process.env.NEXT_PUBLIC_authDomain,
+            projectId: process.env.NEXT_PUBLIC_projectId,
+            storageBucket: process.env.NEXT_PUBLIC_storageBucket,
+            messagingSenderId: process.env.NEXT_PUBLIC_messagingSenderId,
+            appId: process.env.NEXT_PUBLIC_appId,
+            measurementId: process.env.NEXT_PUBLIC_measurementId
         };
         const firebaseApp = initializeApp(firebaseConfig);
         const storage = getStorage(firebaseApp)
@@ -111,7 +111,7 @@ export default function SkickaKvitto() {
             <div className={styles.Form}>
                 <form className={styles.formStyle} onSubmit={handleSubmit}>
                     <label className={styles.labelStyle} htmlFor="vara">vara:</label>
-                    <input type="text" name="vara" placeholder="namn på vara" value={state.vara} maxLength={16} required
+                    <input type="text" name="vara" placeholder="namn på vara (max 16 tecken)" value={state.vara} maxLength={16} required
                            onChange={handleChange}/>
                     <label className={styles.labelStyle} htmlFor="pris">pris:</label>
                     <input type="number" name="pris" placeholder="pris (skriv inte kr)" value={state.pris} required
