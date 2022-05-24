@@ -65,6 +65,7 @@ export default function SkickaKvitto() {
     function test(test){
         console.log("sending")
         let bildurl;
+        // TODO: Få det här att funka med env variables
         const firebaseConfig = {
             apiKey: "AIzaSyC3Okk1Aa2n5P_4ovSGoqwH7Q5cfjZO_l4",
             authDomain: "nfkvitton.firebaseapp.com",
@@ -120,8 +121,11 @@ export default function SkickaKvitto() {
                            onChange={handleChange}/>
                     <label className={styles.labelStyle} htmlFor="kategori">kategori på köp:</label>
                     <select className={styles.kategori} name="kategori" id="kategori" required onChange={handleChange}>
+                        <option value="Medlemsavgifter">Medlemsavgifter</option>
                         <option value="Laborationer">Laborationer</option>
                         <option value="Kök&fester">Kök & fester</option>
+                        <option value="Försäljning">Försäljning</option>
+                        <option value="NF-artiklar">NF-artiklar</option>
                         <option value="Övrigt">Övrigt</option>
                     </select>
                     <label className={styles.labelStyle} htmlFor="bild">kvitto:</label>

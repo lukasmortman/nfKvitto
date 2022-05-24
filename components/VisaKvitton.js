@@ -160,7 +160,13 @@ export default function VisaKvitton({data}) {
             sheet.getColumnKey("datum").numFmt = "[$-x-sysdate]DDDD, MMMM DD, aaaa"
             sheet.getColumnKey("kassaKredit").numFmt = "###0k\\r;-###0k\\r"
             sheet.getColumnKey("laborationerDebit").numFmt = "###0k\\r;-###0k\\r"
+            sheet.getColumnKey("kassaDebit").eachCell(function (cell, rowNumber) {
+                cell.numFmt = "###0k\\r;-###0k\\r"
+            });
             sheet.getColumnKey("kökDebit").numFmt = "###0k\\r;-###0k\\r"
+            sheet.getColumnKey("medlemsavgifterKredit").numFmt = "###0k\\r;-###0k\\r"
+            sheet.getColumnKey("försäljningKredit").numFmt = "###0k\\r;-###0k\\r"
+            sheet.getColumnKey("artiklarKredit").numFmt = "###0k\\r;-###0k\\r"
             sheet.getCell("C1").style = {
                 fill: {
                     type: "pattern",
@@ -244,6 +250,12 @@ export default function VisaKvitton({data}) {
                 sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums,laborationerDebit:priset });
             }else if(item.kategori === "Övrigt") {
                 sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums, övrigtDebit: priset});
+            }else if(item.kategori === "Medlemsavgifter") {
+                sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums, medlemsavgifterKredit: priset});
+            }else if(item.kategori === "Försäljning") {
+                sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums, försäljningKredit: priset});
+            }else if(item.kategori === "NF-artiklar") {
+                sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums, artiklarKredit: priset});
             }
             sheet.getCell(`B${i+3}`).value = {
                 hyperlink: item.bild,
