@@ -88,7 +88,7 @@ export default function SkickaKvitto() {
                 if(state.kategori===""){
                     const res = await fetch('/api/SkickaData', {
                         method: 'POST',
-                        body: JSON.stringify({vara:state.vara,pris:Math.round(state.pris),kategori: "Laborationer",datum:state.datum,bild:downloadURL,swish:state.swish}),
+                        body: JSON.stringify({vara:state.vara,pris:Math.round(state.pris),kategori: "Medlemsavgifter",datum:state.datum,bild:downloadURL,swish:state.swish}),
                     });
                 }else{
                     const res = await fetch('/api/SkickaData', {
@@ -106,7 +106,8 @@ export default function SkickaKvitto() {
         test(JSON.stringify(form))
     }
 
-
+    // TODO: fixa så att det inte står vara något mer kom på något annat
+    // TODO: lös också så att avgift/intäkt funktion finns, typ så att man bestämmer det innan eller något
     return (
             <div className={styles.Form}>
                 <form className={styles.formStyle} onSubmit={handleSubmit}>

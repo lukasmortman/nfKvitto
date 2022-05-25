@@ -345,6 +345,7 @@ export default function VisaKvitton({data}) {
                     </button>
                 </span>
             <div className={styles.Padding1REM}>
+                // TODO: måste lägga till så att texten är annorlunda om det är avgift/intäkt
                 {data.map(({vara, pris,kategori, datum, swish, bild}) => (
                     <div className={`${styles.parent}`} key={vara}>
                         <div className={styles.div6}>
