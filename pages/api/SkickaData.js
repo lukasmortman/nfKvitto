@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-const url = "mongodb+srv://admin:halods1234@kvittodatabas.iivvn.mongodb.net/information?retryWrites=true&w=majority";
+const url = process.env.MONGODB_URI;
 
 export default async function handler(req, res) {
     let data = (JSON.parse(req.body))

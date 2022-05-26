@@ -63,17 +63,14 @@ export default function SkickaKvitto() {
 
 
     function test(test){
-        console.log("sending")
-        let bildurl;
-        // TODO: Få det här att funka med env variables
         const firebaseConfig = {
-            apiKey: "AIzaSyC3Okk1Aa2n5P_4ovSGoqwH7Q5cfjZO_l4",
-            authDomain: "nfkvitton.firebaseapp.com",
-            projectId: "nfkvitton",
+            apiKey: process.env.apiKey,
+            authDomain: process.env.authDomain,
+            projectId: process.env.projectId,
             storageBucket: "nfkvitton.appspot.com",
-            messagingSenderId: "773494506675",
-            appId: "1:773494506675:web:82c77ade0673e7cc651cc6",
-            measurementId: "G-8YPG6B5MDF"
+            messagingSenderId: process.env.messagingSenderId,
+            appId: process.env.appId,
+            measurementId: process.env.measurementId
         };
         const firebaseApp = initializeApp(firebaseConfig);
         const storage = getStorage(firebaseApp)
@@ -83,15 +80,14 @@ export default function SkickaKvitto() {
         uploadString(storageRef, message4, 'data_url').then((snapshot) => {
             return getDownloadURL(snapshot.ref)
         }).then(async downloadURL => {
-            bildurl = downloadURL
             try {
                 if(state.kategori===""){
-                    const res = await fetch('/api/SkickaData', {
+                    await fetch('/api/SkickaData', {
                         method: 'POST',
                         body: JSON.stringify({vara:state.vara,pris:Math.round(state.pris),kategori: "Medlemsavgifter",datum:state.datum,bild:downloadURL,swish:state.swish}),
                     });
                 }else{
-                    const res = await fetch('/api/SkickaData', {
+                    await fetch('/api/SkickaData', {
                         method: 'POST',
                         body: JSON.stringify({vara:state.vara,pris:Math.round(state.pris),kategori: state.kategori,datum:state.datum,bild:downloadURL,swish:state.swish}),
                     });

@@ -15,7 +15,7 @@
     margin-top: 2vh;
     max-width: 400px;
 }
-
+/*TODO:KOLLA VARFÖR SIDAN ÄNDRAR STORLEK SOM INTE VISA KVITTO GÖR*/
 
 .formStyle {
     display: flex;
