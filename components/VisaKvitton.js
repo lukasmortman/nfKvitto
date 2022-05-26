@@ -74,7 +74,7 @@ export default function VisaKvitton({data}) {
                         },
                     },
                 }
-                sheet.getColumn(`${alphabetList[(i * 2) + 2]}`).eachCell(function (cell, rowNumber) {
+                sheet.getColumn(`${alphabetList[(i * 2) + 2]}`).eachCell(function (cell) {
                     cell.style = {
                         border: {
                             left: {
@@ -84,7 +84,7 @@ export default function VisaKvitton({data}) {
                     };
 
                 })
-                sheet.getColumn(`${alphabetList[(i)]}`).eachCell(function (cell, rowNumber) {
+                sheet.getColumn(`${alphabetList[(i)]}`).eachCell(function (cell) {
                     cell.alignment = {
                         horizontal: "left"
                     }
@@ -350,9 +350,9 @@ export default function VisaKvitton({data}) {
                         <div className={styles.div6}>
                             <Image src={bild} alt={"bild på kvittot"} height={80} width={80}/>
                         </div>
-                        <div className={styles.div1}><p className={styles.fitText}>namn på vara: {vara.slice(0,16)} </p>
+                        <div className={styles.div1}><p className={styles.fitText}>namn på köp: {vara} </p>
                         </div>
-                        <div className={styles.div2}><p className={styles.fitText}>pris på vara: {pris}kr</p>
+                        <div className={styles.div2}><p className={styles.fitText}>pris på köp: {pris}kr</p>
                         </div>
                         <div className={styles.div3}><p className={styles.fitText}>kategori på köp: {kategori}</p>
                         </div>
