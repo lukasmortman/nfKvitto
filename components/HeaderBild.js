@@ -14,7 +14,7 @@ export default function HeaderBild() {
                     className={styles.FlexAndCenter}
                     style={{marginTop: "1vh"}}
                 />
-                <h1 className={styles.FlexAndCenter} style={{margin: "-0.5vh"}}>nf kvitto</h1>
+                <h1 className={styles.FlexAndCenter} style={{margin: "-0.5vh"}}>nf kvitton</h1>
             </div>
     )
 
