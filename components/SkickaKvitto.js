@@ -2,7 +2,7 @@ import {useState} from "react";
 import styles from '../styles/SkickaKvitto.module.css'
 import {initializeApp} from "firebase/app";
 import {getDownloadURL, getStorage, ref, uploadString} from "firebase/storage";
-
+const axios = require('axios').default;
 
 export default function SkickaKvitto() {
     const [state, setState] = useState({
@@ -13,9 +13,11 @@ export default function SkickaKvitto() {
         swish: "",
         kategori: "",
         typavkop: "",
+        qrkod: ""
     })
     const [skickat, setSkickat] = useState("")
     const [base64, setBase64] = useState("")
+    const [swishqr, setSwishqr] = useState("")
 
 
     const handleSubmit = event => {
@@ -26,7 +28,8 @@ export default function SkickaKvitto() {
             kategori: state.kategori,
             datum: state.datum,
             bild: base64,
-            swish: state.swish
+            swish: state.swish,
+            qrkod: swishqr
         }))
         setState({
             vara: "",
@@ -35,11 +38,12 @@ export default function SkickaKvitto() {
             bild: "",
             swish: "",
             kategori: "",
+            qrkod: ""
         })
         setBase64("")
+        setSwishqr("")
         setSkickat("Kvitto inskickat")
         setTimeout(fixaText, 5000)
-
         function fixaText() {
             setSkickat("")
         }
@@ -54,6 +58,7 @@ export default function SkickaKvitto() {
                 setBase64(reader.result)
             }
             reader.readAsDataURL(file);
+
             const value = event.target.value;
             setState({
                 ...state,
@@ -69,7 +74,7 @@ export default function SkickaKvitto() {
     }
 
 
-    function test(test) {
+    async function test(test) {
         const firebaseConfig = {
             apiKey: process.env.apiKey,
             authDomain: process.env.authDomain,
@@ -82,59 +87,84 @@ export default function SkickaKvitto() {
         const firebaseApp = initializeApp(firebaseConfig);
         const storage = getStorage(firebaseApp)
         let data = (JSON.parse(test))
+        //TODO: LÄGG TILL SÅ ATT MAN AUTOMATISKT LÄGGER IN SWISH GENOM APIN, DEN BORDE UPPLADA DATAN TILL SIDAN
         const storageRef = ref(storage, data.vara);
         const message4 = data.bild;
+
+        let body = {
+            format: "svg",
+            payee: {value: "0725665551", editable: false},
+            amount: {value: 23, editable: false},
+            message: {value: "Stålull", editable: false},
+        }
+        let response = await axios.post('https://mpc.getswish.net/qrg-swish/api/v1/prefilled', body)
+        const reader2 = new FileReader();
+        reader2.onloadend = function () {
+            setSwishqr(reader2.result)
+        }
+        reader2.readAsDataURL(response.data);
+
+        const storageRef2 = ref(storage, `${data.vara}SWISH`);
+        const message5 = data.qrkod;
+
         uploadString(storageRef, message4, 'data_url').then((snapshot) => {
             return getDownloadURL(snapshot.ref)
         }).then(async downloadURL => {
-            try {
-                if (state.kategori === "" && state.typavkop === "intäkt") {
-                    await fetch('/api/SkickaData', {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            vara: state.vara,
-                            pris: Math.round(state.pris),
-                            kategori: "Medlemsavgifter",
-                            datum: state.datum,
-                            bild: downloadURL,
-                            swish: state.swish
-                        }),
-                    });
-                } else if(state.kategori === "" && state.typavkop === "avgift"){
-                    await fetch('/api/SkickaData', {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            vara: state.vara,
-                            pris: Math.round(state.pris),
-                            kategori: "Laborationer",
-                            datum: state.datum,
-                            bild: downloadURL,
-                            swish: state.swish
-                        }),
-                    });
+            uploadString(storageRef2, message5, 'data_url').then((snapshot) => {
+                return getDownloadURL(snapshot.ref)
+            }).then(async downloadURL2 => {
+                try {
+                    if (state.kategori === "" && state.typavkop === "intäkt") {
+                        await fetch('/api/SkickaData', {
+                            method: 'POST',
+                            body: JSON.stringify({
+                                vara: state.vara,
+                                pris: Math.round(state.pris),
+                                kategori: "Medlemsavgifter",
+                                datum: state.datum,
+                                bild: downloadURL,
+                                swish: state.swish,
+                                qrkod: downloadURL2
+                            }),
+                        });
+                    } else if (state.kategori === "" && state.typavkop === "avgift") {
+                        await fetch('/api/SkickaData', {
+                            method: 'POST',
+                            body: JSON.stringify({
+                                vara: state.vara,
+                                pris: Math.round(state.pris),
+                                kategori: "Laborationer",
+                                datum: state.datum,
+                                bild: downloadURL,
+                                swish: state.swish,
+                                qrkod: downloadURL2
+                            }),
+                        });
+                    } else {
+                        await fetch('/api/SkickaData', {
+                            method: 'POST',
+                            body: JSON.stringify({
+                                vara: state.vara,
+                                pris: Math.round(state.pris),
+                                kategori: state.kategori,
+                                datum: state.datum,
+                                bild: downloadURL,
+                                swish: state.swish,
+                                qrkod: downloadURL2
+                            }),
+                        });
+                    }
+
+                } catch (error) {
+                    console.log("error", error)
                 }
-                else {
-                    await fetch('/api/SkickaData', {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            vara: state.vara,
-                            pris: Math.round(state.pris),
-                            kategori: state.kategori,
-                            datum: state.datum,
-                            bild: downloadURL,
-                            swish: state.swish
-                        }),
-                    });
-                }
-            } catch (error) {
-                console.log("error", error)
-            }
+            })
         })
     }
 
 
-    // TODO: fixa så att det inte står vara något mer kom på något annat
-    // TODO: lös också så att avgift/intäkt funktion finns, typ så att man bestämmer det innan eller något
+    // TODO: går kanske att göra varje return till en egen komponent och flytta logiken ovan till komponenternas sida, hade varit lättare att läsa
+    // TODO: och hade varit lättare att redigera
     return state.typavkop === "avgift"
         ? (
             <div className={styles.Form}>

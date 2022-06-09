@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import styles from '../styles/VisaKvitto.module.css'
 import {saveAs} from "file-saver";
-
+import Link from 'next/link'
 const ExcelJS = require('exceljs');
 const alphabetList = [
     "D",
@@ -29,6 +29,7 @@ const alphabetList = [
     "Z",
     "Z"
 ];
+
 export default function VisaKvitton({data}) {
     data = data.sort((a, b) =>  new Date(b.datum) - new Date(a.datum));
     async function handleExport() {
@@ -348,7 +349,9 @@ export default function VisaKvitton({data}) {
                 {data.map(({vara, pris,kategori, datum, swish, bild}) => (
                     <div className={`${styles.parent}`} key={vara}>
                         <div className={styles.div6}>
-                            <Image src={bild} alt={"bild på kvittot"} height={80} width={80}/>
+                            <Link href="/swishSida">
+                                <Image src={bild} alt={"bild på kvittot"} height={80} width={80}/>
+                            </Link>
                         </div>
                         <div className={styles.div1}><p className={styles.fitText}>namn på köp: {vara} </p>
                         </div>

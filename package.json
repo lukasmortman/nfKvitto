@@ -6,12 +6,18 @@
     "start": "next start"
   },
   "dependencies": {
+    "exceljs": "4.3.0",
     "file-saver": "^2.0.5",
     "firebase": "9.6.11",
+    "follow-redirects": "^1.15.1",
+    "got": "^12.1.0",
     "mongodb": "^4.5.0",
     "next": "latest",
+    "node-fetch": "^3.2.5",
     "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "exceljs": "4.3.0"
+    "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "axios": "^0.27.2"
   }
 }

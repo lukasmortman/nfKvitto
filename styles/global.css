@@ -7,6 +7,14 @@ h1{
     -ms-user-select: none;
     user-select: none;
 }
+h2,h3,h4{
+    font-family: Courier NewEGEN, serif;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 label, button, input, p{
     font-family: Courier NewEGEN, serif;
 }
