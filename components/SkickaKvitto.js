@@ -91,13 +91,7 @@ export default function SkickaKvitto() {
         const storageRef = ref(storage, data.vara);
         const message4 = data.bild;
 
-        let body = {
-            format: "svg",
-            payee: {value: "0725665551", editable: false},
-            amount: {value: 23, editable: false},
-            message: {value: "Stålull", editable: false},
-        }
-        let response = await axios.post('https://mpc.getswish.net/qrg-swish/api/v1/prefilled', body)
+
         const reader2 = new FileReader();
         reader2.onloadend = function () {
             setSwishqr(reader2.result)
@@ -175,6 +169,7 @@ export default function SkickaKvitto() {
                     <button name="typavkop" onClick={() => setState({...state, "typavkop": "intäkt"
                     })}>intäkt
                     </button>
+
                 </div>
                 <form className={styles.formStyle} onSubmit={handleSubmit}>
                     <label className={styles.labelStyle} htmlFor="kategori">kategori på avgift:</label>

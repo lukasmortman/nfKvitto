@@ -8,7 +8,9 @@ const axios = require('axios').default;
 import Image from 'next/image'
 
 export default function Home({data}) {
-    const bild = data[0]
+    let blob = new Blob([data], {type: 'image/svg+xml'});
+    let url = URL.createObjectURL(blob);
+
     return (
         <>
             <Head>
@@ -34,12 +36,11 @@ export default function Home({data}) {
                     <h3>vara: Stållull</h3>
                     <h3>pris: 23kr</h3>
                     <h3>swishnummer: 0725665551</h3>
-                    <Image src="https://i.imgur.com/vBR0hoF.jpg"
+                    <Image src={`${url}`}
                            width={1}
                            height={1}
                            layout="responsive"
                            objectFit="cover"/>
-                    <p>{data}</p>
                 </div>
             </div>
         </>
@@ -47,14 +48,7 @@ export default function Home({data}) {
 }
 
 export async function getServerSideProps() {
-    let body = {
-        format: "svg",
-        payee: {value: "0725665551", editable: false},
-        amount: {value: 23, editable: false},
-        message: {value: "Stålull", editable: false},
-    }
-
-    let response = await axios.post('https://mpc.getswish.net/qrg-swish/api/v1/prefilled', body)
+    let response = await axios.get("http://localhost:3000/api/swishData")
     return {
         props: {
             data: response.data
