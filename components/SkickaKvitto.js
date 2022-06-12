@@ -2,7 +2,6 @@ import {useState} from "react";
 import styles from '../styles/SkickaKvitto.module.css'
 import {initializeApp} from "firebase/app";
 import {getDownloadURL, getStorage, ref, uploadString} from "firebase/storage";
-const axios = require('axios').default;
 
 export default function SkickaKvitto() {
     const [state, setState] = useState({

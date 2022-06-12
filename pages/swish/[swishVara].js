@@ -1,15 +1,22 @@
-import Swish from "../components/swish";
 import Head from "next/head";
-import HeaderBild from "../components/HeaderBild";
-import styles from '../styles/VisaKvitto.module.css'
+import HeaderBild from "../../components/HeaderBild";
+import styles from '../../styles/VisaKvitto.module.css'
 import Link from "next/link";
-
 const axios = require('axios').default;
 import Image from 'next/image'
+import {useRouter} from "next/router";
 
 export default function Home({data}) {
-    let blob = new Blob([data], {type: 'image/svg+xml'});
-    let url = URL.createObjectURL(blob);
+    let url;
+    const router = useRouter()
+    const info  = router.query
+
+    if (typeof window !== 'undefined') {
+        let blob = new Blob([data], {type: 'image/svg+xml'});
+         url = URL.createObjectURL(blob);
+    } else {
+        url = "https://i.imgur.com/2wy20X6.jpg"
+    }
 
     return (
         <>
@@ -26,16 +33,15 @@ export default function Home({data}) {
             <div className={styles.container}>
                 <HeaderBild/>
                 <div style={{
-                    width: "20vw",
                     alignSelf: "center",
                     textAlign: "center"
                 }}>
                     <Link href="/admin">
                         <button>tillbaka</button>
                     </Link>
-                    <h3>vara: Stållull</h3>
-                    <h3>pris: 23kr</h3>
-                    <h3>swishnummer: 0725665551</h3>
+                    <h3>swishnummer:  {info.swish}</h3>
+                    <h3>pris: {info.pris}kr</h3>
+                    <h3>vara: {info.swishVara} </h3>
                     <Image src={`${url}`}
                            width={1}
                            height={1}
@@ -47,8 +53,9 @@ export default function Home({data}) {
     )
 }
 
-export async function getServerSideProps() {
-    let response = await axios.get("http://localhost:3000/api/swishData")
+export async function getServerSideProps(ctx) {
+    const info  = ctx.query
+    let response = await axios.get(process.env.baseURL+`/api/${info.swishVara}?pris=${info.pris}&swishnummer=${info.swish}`)
     return {
         props: {
             data: response.data

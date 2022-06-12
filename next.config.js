@@ -22,3 +22,7 @@ module.exports = {
         responseLimit: false,
     },
 }
+
+axios: {
+    baseURL: '/'
+}

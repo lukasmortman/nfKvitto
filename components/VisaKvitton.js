@@ -349,7 +349,7 @@ export default function VisaKvitton({data}) {
                 {data.map(({vara, pris,kategori, datum, swish, bild}) => (
                     <div className={`${styles.parent}`} key={vara}>
                         <div className={styles.div6}>
-                            <Link href="/swishSida">
+                            <Link href={`/swish/${vara}?swish=${swish}&pris=${pris}`}>
                                 <Image src={bild} alt={"bild på kvittot"} height={80} width={80}/>
                             </Link>
                         </div>

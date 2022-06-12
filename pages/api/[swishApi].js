@@ -1,7 +1,7 @@
 import {default as axios} from "axios";
 
-
 export default async function handler(req, res) {
+    const  data = req.query
     const replacerFunc = () => {
         const visited = new WeakSet();
         return (key, value) => {
@@ -17,9 +17,9 @@ export default async function handler(req, res) {
 
     let body = {
         format: "svg",
-        payee: {value: "0725665551", editable: false},
-        amount: {value: 23, editable: false},
-        message: {value: "Stålull", editable: false},
+        payee: {value: data.swishnummer, editable: false},
+        amount: {value: data.pris, editable: false},
+        message: {value: data.swishApi, editable: false},
     }
 
     let response = await axios.post('https://mpc.getswish.net/qrg-swish/api/v1/prefilled', body)
