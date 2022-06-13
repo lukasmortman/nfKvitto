@@ -31,7 +31,6 @@ const alphabetList = [
 ];
 
 export default function VisaKvitton({data}) {
-    data = data.sort((a, b) =>  new Date(b.datum) - new Date(a.datum));
     async function handleExport() {
         const workbook = new ExcelJS.Workbook();
 
@@ -346,7 +345,8 @@ export default function VisaKvitton({data}) {
                     </button>
                 </span>
             <div className={styles.Padding1REM}>
-                {data.map(({vara, pris,kategori, datum, swish, bild}) => (
+                <h3 style={{marginBottom: "0"}}>senaste kvitton:</h3>
+                {data.slice(0).reverse().map(({vara, pris,kategori, datum, swish, bild}) => (
                     <div className={`${styles.parent}`} key={vara}>
                         <div className={styles.div6}>
                             <Link href={`/swish/${vara}?swish=${swish}&pris=${pris}`}>

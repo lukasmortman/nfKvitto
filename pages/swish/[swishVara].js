@@ -5,18 +5,13 @@ import Link from "next/link";
 const axios = require('axios').default;
 import Image from 'next/image'
 import {useRouter} from "next/router";
+var svgToMiniDataURI = require('mini-svg-data-uri');
 
 export default function Home({data}) {
     let url;
     const router = useRouter()
     const info  = router.query
 
-    if (typeof window !== 'undefined') {
-        let blob = new Blob([data], {type: 'image/svg+xml'});
-         url = URL.createObjectURL(blob);
-    } else {
-        url = "https://i.imgur.com/2wy20X6.jpg"
-    }
 
     return (
         <>
@@ -42,7 +37,7 @@ export default function Home({data}) {
                     <h3>swishnummer:  {info.swish}</h3>
                     <h3>pris: {info.pris}kr</h3>
                     <h3>vara: {info.swishVara} </h3>
-                    <Image src={`${url}`}
+                    <Image src={`${svgToMiniDataURI(data)}`}
                            width={1}
                            height={1}
                            layout="responsive"
@@ -55,6 +50,8 @@ export default function Home({data}) {
 
 export async function getServerSideProps(ctx) {
     const info  = ctx.query
+    console.log(info)
+    console.log("SKICKAT")
     let response = await axios.get(process.env.baseURL+`/api/${info.swishVara}?pris=${info.pris}&swishnummer=${info.swish}`)
     return {
         props: {

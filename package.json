@@ -10,6 +10,7 @@
     "exceljs": "4.3.0",
     "file-saver": "^2.0.5",
     "firebase": "latest",
+    "mini-svg-data-uri": "^1.4.4",
     "mongodb": "latest",
     "next": "latest",
     "react": "17.0.2",
