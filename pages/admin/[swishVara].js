@@ -8,7 +8,6 @@ import {useRouter} from "next/router";
 var svgToMiniDataURI = require('mini-svg-data-uri');
 
 export default function Home({data}) {
-    let url;
     const router = useRouter()
     const info  = router.query
 
@@ -50,8 +49,6 @@ export default function Home({data}) {
 
 export async function getServerSideProps(ctx) {
     const info  = ctx.query
-    console.log(info)
-    console.log("SKICKAT")
     let response = await axios.get(process.env.baseURL+`/api/${info.swishVara}?pris=${info.pris}&swishnummer=${info.swish}`)
     return {
         props: {

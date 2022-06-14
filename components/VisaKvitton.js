@@ -163,6 +163,7 @@ export default function VisaKvitton({data}) {
             sheet.getColumnKey("kassaDebit").eachCell(function (cell, rowNumber) {
                 cell.numFmt = "###0k\\r;-###0k\\r"
             });
+            sheet.getColumnKey("övrigtDebit").numFmt = "###0k\\r;-###0k\\r"
             sheet.getColumnKey("kökDebit").numFmt = "###0k\\r;-###0k\\r"
             sheet.getColumnKey("medlemsavgifterKredit").numFmt = "###0k\\r;-###0k\\r"
             sheet.getColumnKey("försäljningKredit").numFmt = "###0k\\r;-###0k\\r"
@@ -349,7 +350,7 @@ export default function VisaKvitton({data}) {
                 {data.slice(0).reverse().map(({vara, pris,kategori, datum, swish, bild}) => (
                     <div className={`${styles.parent}`} key={vara}>
                         <div className={styles.div6}>
-                            <Link href={`/swish/${vara}?swish=${swish}&pris=${pris}`}>
+                            <Link href={`/admin/${vara}?swish=${swish}&pris=${pris}`}>
                                 <Image src={bild} alt={"bild på kvittot"} height={80} width={80}/>
                             </Link>
                         </div>

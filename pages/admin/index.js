@@ -1,8 +1,8 @@
-import VisaKvitton from "../components/VisaKvitton";
+import VisaKvitton from "../../components/VisaKvitton";
 import Head from "next/head";
-import {connectToDatabase} from "../utils/mongodb";
-import HeaderBild from "../components/HeaderBild";
-import adminStyles from '../styles/adminStyles.module.css'
+import {connectToDatabase} from "../../utils/mongodb";
+import HeaderBild from "../../components/HeaderBild";
+import adminStyles from '../../styles/adminStyles.module.css'
 
 export default function Home({data}) {
     return (
