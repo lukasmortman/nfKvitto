@@ -1,6 +1,6 @@
 module.exports = {
     images: {
-        domains: ['firebasestorage.googleapis.com'],
+        domains: ['firebasestorage.googleapis.com',"i.imgur.com"]
     },
     future: {
         webpack5: true, // by default, if you customize webpack config, they switch back to version 4.
@@ -21,4 +21,8 @@ module.exports = {
         },
         responseLimit: false,
     },
+}
+
+axios: {
+    baseURL: '/'
 }

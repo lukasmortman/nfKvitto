@@ -21,7 +21,7 @@ export default function Custom404() {
                     <h1 style={{
                         display: "flex",
                         justifyContent: "center"
-                    }}>Något gick fel, testa igen</h1>
+                    }}>Något gick fel</h1>
                 </div>
             </div>
 

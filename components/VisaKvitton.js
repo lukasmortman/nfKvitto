@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import styles from '../styles/VisaKvitto.module.css'
 import {saveAs} from "file-saver";
-
+import Link from 'next/link'
 const ExcelJS = require('exceljs');
 const alphabetList = [
     "D",
@@ -29,8 +29,8 @@ const alphabetList = [
     "Z",
     "Z"
 ];
+
 export default function VisaKvitton({data}) {
-    data = data.sort((a, b) =>  new Date(b.datum) - new Date(a.datum));
     async function handleExport() {
         const workbook = new ExcelJS.Workbook();
 
@@ -163,6 +163,7 @@ export default function VisaKvitton({data}) {
             sheet.getColumnKey("kassaDebit").eachCell(function (cell, rowNumber) {
                 cell.numFmt = "###0k\\r;-###0k\\r"
             });
+            sheet.getColumnKey("övrigtDebit").numFmt = "###0k\\r;-###0k\\r"
             sheet.getColumnKey("kökDebit").numFmt = "###0k\\r;-###0k\\r"
             sheet.getColumnKey("medlemsavgifterKredit").numFmt = "###0k\\r;-###0k\\r"
             sheet.getColumnKey("försäljningKredit").numFmt = "###0k\\r;-###0k\\r"
@@ -345,10 +346,13 @@ export default function VisaKvitton({data}) {
                     </button>
                 </span>
             <div className={styles.Padding1REM}>
-                {data.map(({vara, pris,kategori, datum, swish, bild}) => (
+                <h3 style={{marginBottom: "0"}}>senaste kvitton:</h3>
+                {data.slice(0).reverse().map(({vara, pris,kategori, datum, swish, bild}) => (
                     <div className={`${styles.parent}`} key={vara}>
                         <div className={styles.div6}>
-                            <Image src={bild} alt={"bild på kvittot"} height={80} width={80}/>
+                            <Link href={`/admin/${vara}?swish=${swish}&pris=${pris}`}>
+                                <Image src={bild} alt={"bild på kvittot"} height={80} width={80}/>
+                            </Link>
                         </div>
                         <div className={styles.div1}><p className={styles.fitText}>namn på köp: {vara} </p>
                         </div>

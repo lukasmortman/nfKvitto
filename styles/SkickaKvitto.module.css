@@ -10,7 +10,6 @@
 }
 .Text {
     justify-self: center;
-    align-self: center;
     width: 70vw;
     margin-top: 2vh;
     max-width: 400px;
@@ -21,6 +20,7 @@
     display: flex;
     flex-direction: column;
     max-width: 62vw;
+    align-self: center;
 }
 .kategori {
     min-width: 120px;
@@ -41,6 +41,11 @@
     display: flex;
     justify-content: center;
     font-size: 5rem;
+}
+
+.centerKnappar{
+    display: flex;
+    justify-content: center;
 }
 
 @media screen and (max-width: 800px) {
