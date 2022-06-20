@@ -5,7 +5,7 @@ import Link from "next/link";
 const axios = require('axios').default;
 import Image from 'next/image'
 import {useRouter} from "next/router";
-var svgToMiniDataURI = require('mini-svg-data-uri');
+const svgToMiniDataURI = require('mini-svg-data-uri');
 
 export default function Home({data}) {
     const router = useRouter()
