@@ -50,6 +50,7 @@ export default function Home({data}) {
 export async function getServerSideProps(ctx) {
     const info  = ctx.query
     let response = await axios.get(process.env.baseURL+`/api/${info.swishVara}?pris=${info.pris}&swishnummer=${info.swish}`)
+    console.log(response)
     return {
         props: {
             data: response.data
