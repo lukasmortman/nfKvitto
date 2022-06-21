@@ -245,23 +245,44 @@ export default function VisaKvitton({data}) {
         exceldata.forEach((item, i) => {
             let datums = new Date(item.datum);
             let priset = Number(item.pris)
-            if(item.kategori === "Kök&fester"){
-                sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums,kökDebit:priset });
-            }else if(item.kategori === "Laborationer"){
-                sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums,laborationerDebit:priset });
-            }else if(item.kategori === "Övrigt") {
-                sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums, övrigtDebit: priset});
-            }else if(item.kategori === "Medlemsavgifter") {
-                sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums, medlemsavgifterKredit: priset});
-            }else if(item.kategori === "Försäljning") {
-                sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums, försäljningKredit: priset});
-            }else if(item.kategori === "NF-artiklar") {
-                sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums, artiklarKredit: priset});
+            if(item.typavköp === "avgift"){
+                if(item.kategori === "Kök&fester"){
+                    sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums,kökDebit:priset });
+                }else if(item.kategori === "Laborationer"){
+                    sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums,laborationerDebit:priset });
+                }else if(item.kategori === "Övrigt") {
+                    sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums, övrigtDebit: priset});
+                }else if(item.kategori === "Medlemsavgifter") {
+                    sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums, medlemsavgifterDebit: priset});
+                }else if(item.kategori === "Försäljning") {
+                    sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums, försäljningDebit: priset});
+                }else if(item.kategori === "NF-artiklar") {
+                    sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums, artiklarDebit: priset});
+                }
+                sheet.getCell(`B${i+3}`).value = {
+                    hyperlink: item.bild,
+                    text: item.vara
+                }
+            }else if(item.typavköp === "intäkt"){
+                if(item.kategori === "Kök&fester"){
+                    sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums,kökKredit:priset });
+                }else if(item.kategori === "Laborationer"){
+                    sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums,laborationerKredit:priset });
+                }else if(item.kategori === "Övrigt") {
+                    sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums, övrigtKredit: priset});
+                }else if(item.kategori === "Medlemsavgifter") {
+                    sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums, medlemsavgifterKredit: priset});
+                }else if(item.kategori === "Försäljning") {
+                    sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums, försäljningKredit: priset});
+                }else if(item.kategori === "NF-artiklar") {
+                    sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums, artiklarKredit: priset});
+                }
+                sheet.getCell(`B${i+3}`).value = {
+                    hyperlink: item.bild,
+                    text: item.vara
+                }
             }
-            sheet.getCell(`B${i+3}`).value = {
-                hyperlink: item.bild,
-                text: item.vara
-            }
+
         });
         fixaborders()
         for (let i = 0; i < 11; i++) {
@@ -338,6 +359,7 @@ export default function VisaKvitton({data}) {
     }
 
     // TODO: måste lägga till så att texten är annorlunda om det är avgift/intäkt
+    // TODO: MÅSTE FIXA TYPAVKOP I VISAS, SÅ INTE EXCEL FACKAR OCH SÅ ATT EXCEL VET OM ÖVRIGT ÄR AVGIFT ELLER INTÄKT
     return (
         <>
             <span className={styles.FlexAndCenter}>
@@ -347,20 +369,20 @@ export default function VisaKvitton({data}) {
                 </span>
             <div className={styles.Padding1REM}>
                 <h3 style={{marginBottom: "0"}}>senaste kvitton:</h3>
-                {data.slice(0).reverse().map(({vara, pris,kategori, datum, swish, bild}) => (
+                {data.slice(0).reverse().map(({vara, pris,kategori, datum, swish, bild,typavköp}) => (
                     <div className={`${styles.parent}`} key={vara}>
                         <div className={styles.div6}>
                             <Link href={`/admin/${vara}?swish=${swish}&pris=${pris}`}>
                                 <Image src={bild} alt={"bild på kvittot"} height={80} width={80}/>
                             </Link>
                         </div>
-                        <div className={styles.div1}><p className={styles.fitText}>namn på köp: {vara} </p>
+                        <div className={styles.div1}><p className={styles.fitText}>namn på {typavköp}: {vara} </p>
                         </div>
-                        <div className={styles.div2}><p className={styles.fitText}>pris på köp: {pris}kr</p>
+                        <div className={styles.div2}><p className={styles.fitText}>pris på {typavköp}: {pris}kr</p>
                         </div>
-                        <div className={styles.div3}><p className={styles.fitText}>kategori på köp: {kategori}</p>
+                        <div className={styles.div3}><p className={styles.fitText}>kategori på {typavköp}: {kategori}</p>
                         </div>
-                        <div className={styles.div4}><p className={styles.fitText}>datum köpt: {datum}</p>
+                        <div className={styles.div4}><p className={styles.fitText}>datum {typavköp}en skedde: {datum}</p>
                         </div>
                         <div className={styles.div5}><p className={styles.fitText}>swishnummer: {swish}</p>
                         </div>

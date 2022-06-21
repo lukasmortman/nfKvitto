@@ -23,13 +23,12 @@ export default function SkickaKvitto() {
             bild: base64,
         })
         setState({
+            ...state,
             vara: "",
             pris: "",
             datum: "",
             bild: "",
             swish: "",
-            kategori: "",
-            typavkop: ""
         })
         setBase64("")
         setSkickat("Kvitto inskickat")
