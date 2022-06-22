@@ -358,8 +358,6 @@ export default function VisaKvitton({data}) {
         });
     }
 
-    // TODO: måste lägga till så att texten är annorlunda om det är avgift/intäkt
-    // TODO: MÅSTE FIXA TYPAVKOP I VISAS, SÅ INTE EXCEL FACKAR OCH SÅ ATT EXCEL VET OM ÖVRIGT ÄR AVGIFT ELLER INTÄKT
     return (
         <>
             <span className={styles.FlexAndCenter}>

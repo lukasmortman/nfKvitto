@@ -184,9 +184,6 @@ export default function SkickaKvitto() {
         }
     }
 
-
-    // TODO: går kanske att göra varje return till en egen komponent och flytta logiken ovan till komponenternas sida, hade varit lättare att läsa
-    // TODO: och hade varit lättare att redigera
     return state.typavkop !== ""
         ? (
             <div className={styles.Form}>
