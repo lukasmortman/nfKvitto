@@ -49,8 +49,14 @@ export default function Home({data}) {
 
 export async function getServerSideProps(ctx) {
     const info  = ctx.query
-    let response = await axios.get(process.env.baseURL+`/api/${info.swishVara}?pris=${info.pris}&swishnummer=${info.swish}`)
-    console.log(response)
+    let body = {
+        format: "svg",
+        payee: {value: info.swish, editable: false},
+        amount: {value: info.pris, editable: false},
+        message: {value: info.swishVara, editable: false},
+    }
+
+    let response = await axios.post('https://mpc.getswish.net/qrg-swish/api/v1/prefilled', body)
     return {
         props: {
             data: response.data
