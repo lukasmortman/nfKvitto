@@ -31,7 +31,7 @@ export default function SkickaKvitto() {
             swish: "",
         })
         setBase64("")
-        setSkickat("Kvitto inskickat")
+        setSkickat("Kvitto inskickat!")
         setTimeout(fixaText, 5000)
 
         function fixaText() {
