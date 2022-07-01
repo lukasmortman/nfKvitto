@@ -20,6 +20,6 @@ module.exports = {
             sizeLimit: '4mb' // Set desired value here
         },
         responseLimit: false,
-    },
+    }
 }
 
