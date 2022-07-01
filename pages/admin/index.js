@@ -24,7 +24,7 @@ export default function Home({data}) {
         </>
     )
 }
-export async function getServerSideProps() {
+export async function getStaticProps() {
     const { db } = await connectToDatabase();
     const data = await db
         .collection("kvitton")
@@ -33,6 +33,6 @@ export async function getServerSideProps() {
     return {
         props: {
             data: JSON.parse(JSON.stringify(data)),
-        },
+        }
     };
 }

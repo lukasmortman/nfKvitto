@@ -8,6 +8,7 @@ export default async function handler(req) {
         const dbo = db.db("information");
         dbo.collection("kvitton").insertOne(data, function (err) {
             if (err) throw err;
+            if (!err)
             db.close();
         });
     });
