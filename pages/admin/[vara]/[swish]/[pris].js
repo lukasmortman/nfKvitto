@@ -9,6 +9,11 @@ import {connectToDatabase} from "../../../../utils/mongodb";
 const svgToMiniDataURI = require('mini-svg-data-uri');
 
 export default function Home({bild,data}) {
+    const router = useRouter()
+
+    if (router.isFallback) {
+        return <div>Loading...</div>
+    }
     return (
         <>
             <Head>
@@ -56,7 +61,7 @@ export async function getStaticPaths() {
                 vara: data.vara, swish: data.swish,  pris: data.pris.toString()
             }
     }))
-    return { paths, fallback: false};
+    return { paths, fallback: true};
 }
 
 
