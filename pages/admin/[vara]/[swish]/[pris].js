@@ -57,9 +57,9 @@ export async function getStaticPaths() {
             return {
                 params: {
                     vara: data.vara, swish: data.swish,  pris: data.pris.toString()
-                },  fallback: true
+                },
             };
-        }),
+        }), fallback: true
     };
 }
 
