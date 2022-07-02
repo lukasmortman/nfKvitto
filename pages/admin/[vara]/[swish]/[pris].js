@@ -57,11 +57,9 @@ export async function getStaticPaths() {
             return {
                 params: {
                     vara: data.vara, swish: data.swish,  pris: data.pris.toString()
-                },
+                },  fallback: true
             };
         }),
-        /*option in the paths object, fallback false will return a pre-built page 404 in case no page found*/
-        fallback: false,
     };
 }
 
