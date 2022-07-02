@@ -51,16 +51,12 @@ export async function getStaticPaths() {
         .find({})
         .toArray();
     const dataFixad = JSON.parse(JSON.stringify(data))
-    return {
-        //the method should return always an object called paths, otherwise it will not work
-        paths: dataFixad.map((data) => {
-            return {
-                params: {
-                    vara: data.vara, swish: data.swish,  pris: data.pris.toString()
-                },
-            };
-        }), fallback: true
-    };
+    const paths = dataFixad.map((data) => ({
+            params: {
+                vara: data.vara, swish: data.swish,  pris: data.pris.toString()
+            }
+    }))
+    return { paths, fallback: true};
 }
 
 
