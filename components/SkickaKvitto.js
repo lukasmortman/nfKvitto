@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import styles from '../styles/SkickaKvitto.module.css'
 import {initializeApp} from "firebase/app";
 import {getDownloadURL, getStorage, ref, uploadString} from "firebase/storage";
@@ -170,7 +170,7 @@ export default function SkickaKvitto() {
         }
     }
 
-    function vilkenDefualtValue() {
+    function vilkenDefaultValue() {
         if (state.typavkop === "intäkt" && state.kategori === "") {
             return "Medlemsavgifter"
         } else if (state.typavkop === "avgift" && state.kategori === "") {
@@ -195,7 +195,7 @@ export default function SkickaKvitto() {
                 </div>
                 <form className={styles.formStyle} onSubmit={handleSubmit} onChange={hanteraNytt}>
                     <label className={styles.labelStyle} htmlFor="kategori">kategori på {state.typavkop}:</label>
-                    <select className={styles.kategori} name="kategori" id="kategori" value={vilkenDefualtValue()}
+                    <select className={styles.kategori} name="kategori" id="kategori" value={vilkenDefaultValue()}
                             required>
                         <option value="Laborationer" name="Laborationer"
                                 hidden={vilkenSkaVisas("Laborationer")}>Laborationer
