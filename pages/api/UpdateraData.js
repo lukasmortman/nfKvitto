@@ -21,5 +21,4 @@ export default async function handler(req,res) {
             db.close();
         });
     });
-    res.status(200).end()
 }
