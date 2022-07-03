@@ -16,9 +16,10 @@ export default async function handler(req,res) {
                 kategori: data.kategori
             }
         };
-        dbo.collection("kvitton").updateOne(myquery, newvalues, function (err, res) {
+        dbo.collection("kvitton").updateOne(myquery, newvalues, function (err) {
             if (err) throw err;
             db.close();
+            res.status(200).end()
         });
     });
 }
