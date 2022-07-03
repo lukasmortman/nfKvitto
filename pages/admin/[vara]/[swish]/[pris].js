@@ -27,7 +27,6 @@ export default function Home({bild, attDisplera}) {
 
     const hanteraSubmit =  async event => {
         event.preventDefault();
-        console.log(process.env.baseURL)
         const data = qs.stringify({
             'varaInnan': attDisplera.vara,
             'datumInnan': attDisplera.datum,
