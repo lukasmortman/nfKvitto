@@ -1,16 +1,17 @@
-const MongoClient = require('mongodb').MongoClient;
-const url = process.env.MONGODB_URI;
+import {connectToDatabase} from "../../utils/mongodb";
 
-export default async function handler(req) {
+export default async function handler(req,res) {
     let data = (JSON.parse(req.body))
-    MongoClient.connect(url, function (err, db) {
-        if (err) throw err;
-        const dbo = db.db("information");
-        dbo.collection("kvitton").insertOne(data, function (err) {
-            if (err) throw err;
-            db.close();
-        });
-    });
 
+    const { db } = await connectToDatabase();
+    const databasen = db.collection("kvitton")
+    databasen.insertOne(data, function (err) {
+        if (err) {
+            console.log(err);
+            res.status(500);
+            return;
+        }
+    });
+    res.status(200).json("kvitto inskickat")
 }
 

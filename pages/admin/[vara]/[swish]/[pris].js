@@ -15,7 +15,34 @@ export default function Home({bild, attDisplera}) {
     const [byt, setByt] = useState(false)
     const router = useRouter()
     if (router.isFallback) {
-        return <div>Loading...</div>
+        return <>
+            <Head>
+                <title>Kvitto</title>
+                <meta name="description" content="Hemsida för att se inlagda kvitton."/>
+                <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+                <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+                <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+                <link rel="manifest" href="/site.webmanifest"/>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+            </Head>
+            <div className={styles.container}>
+                <HeaderBild/>
+                <div style={{
+                    alignSelf: "center",
+                    textAlign: "center"
+                }}>
+                    <Link href="/admin">
+                        <button>tillbaka</button>
+                    </Link>
+                    <button onClick={() => setByt(true)}>ändra kvitto</button>
+                    <h3>vara:</h3>
+                    <h3>pris:</h3>
+                    <h3>kategori:</h3>
+                    <h3>datum:</h3>
+                    <h3>swishnummer:</h3>
+                </div>
+            </div>
+        </>
     }
 
     const hanteraNytt = async event => {

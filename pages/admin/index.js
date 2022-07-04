@@ -8,7 +8,7 @@ export default function Home({data}) {
     return (
         <>
             <Head>
-                <title>NF Kvitton Admin Page</title>
+                <title>NF Kvitton admin</title>
                 <meta name="description"
                       content="Hemsida för att se inlagda kvitton."/>
                 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
