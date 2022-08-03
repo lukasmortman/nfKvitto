@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from 'next/future/image'
 import styles from '../styles/VisaKvitto.module.css'
 import {saveAs} from "file-saver";
 import Link from 'next/link'
@@ -367,25 +367,48 @@ export default function VisaKvitton({data}) {
                 </span>
             <div className={styles.Padding1REM}>
                 <h3 style={{marginBottom: "0"}}>senaste kvitton:</h3>
-                {data.slice(0).reverse().map(({vara, pris,kategori, datum, swish, bild,typavköp}) => (
-                    <div className={`${styles.parent}`} key={vara}>
-                        <div className={styles.div6}>
-                            <Link href={`/admin/${vara}/${swish}/${pris+"€"+datum+"€"+kategori}`}>
-                                <Image src={bild} alt={"bild på kvittot"} height={80} width={80}/>
-                            </Link>
+                {data.slice(0).reverse().map(({vara, pris,kategori, datum, swish, bild,typavköp, fixad}) => {
+                    if(fixad === true){
+                        return (<div className={`${styles.parent}`} key={vara}>
+                            <div className={styles.div6}>
+                                <Link href={`/admin/${vara}/${swish}/${pris+"€"+datum+"€"+kategori+"€"+fixad}`}>
+                                    <Image src={bild} alt={"bild på kvittot"} height={80} width={80}/>
+                                </Link>
+                            </div>
+                            <div className={styles.div1}><p className={styles.fitText}>namn på {typavköp}: {vara} </p>
+                            </div>
+                            <div className={styles.div2}><p className={styles.fitText}>pris på {typavköp}: {pris}kr</p>
+                            </div>
+                            <div className={styles.div3}><p className={styles.fitText}>kategori på {typavköp}: {kategori}</p>
+                            </div>
+                            <div className={styles.div4}><p className={styles.fitText}>datum {typavköp}en skedde: {datum}</p>
+                            </div>
+                            <div className={styles.div5}><p className={styles.fitText}>swishnummer: {swish}</p>
+                            </div>
                         </div>
-                        <div className={styles.div1}><p className={styles.fitText}>namn på {typavköp}: {vara} </p>
-                        </div>
-                        <div className={styles.div2}><p className={styles.fitText}>pris på {typavköp}: {pris}kr</p>
-                        </div>
-                        <div className={styles.div3}><p className={styles.fitText}>kategori på {typavköp}: {kategori}</p>
-                        </div>
-                        <div className={styles.div4}><p className={styles.fitText}>datum {typavköp}en skedde: {datum}</p>
-                        </div>
-                        <div className={styles.div5}><p className={styles.fitText}>swishnummer: {swish}</p>
-                        </div>
-                    </div>
-                ))}
+                        )
+                    }else{
+                        return (
+                            <div className={`${styles.parent}`} style={{color: "red"}} key={vara}>
+                                <div className={styles.div6}>
+                                    <Link href={`/admin/${vara}/${swish}/${pris+"€"+datum+"€"+kategori+"€"+fixad}`}>
+                                        <Image src={bild} alt={"bild på kvittot"} height={80} width={80}/>
+                                    </Link>
+                                </div>
+                                <div className={styles.div1}><p className={styles.fitText}>namn på {typavköp}: {vara} </p>
+                                </div>
+                                <div className={styles.div2}><p className={styles.fitText}>pris på {typavköp}: {pris}kr</p>
+                                </div>
+                                <div className={styles.div3}><p className={styles.fitText}>kategori på {typavköp}: {kategori}</p>
+                                </div>
+                                <div className={styles.div4}><p className={styles.fitText}>datum {typavköp}en skedde: {datum}</p>
+                                </div>
+                                <div className={styles.div5}><p className={styles.fitText}>swishnummer: {swish}</p>
+                                </div>
+                            </div>
+                            )
+                    }
+                })}
             </div>
         </>
     )

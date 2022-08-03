@@ -100,7 +100,8 @@ export default function SkickaKvitto() {
                             datum: state.datum,
                             bild: downloadURL,
                             swish: state.swish,
-                            typavköp: state.typavkop
+                            typavköp: state.typavkop,
+                            fixad: false
                         }),
                     });
                 } else if (state.kategori === "Medlemsavgifter" && state.typavkop === "avgift") {
@@ -113,7 +114,8 @@ export default function SkickaKvitto() {
                             datum: state.datum,
                             bild: downloadURL,
                             swish: state.swish,
-                            typavköp: state.typavkop
+                            typavköp: state.typavkop,
+                            fixad: false
                         }),
                     });
                 } else if (state.kategori === "" && state.typavkop === "intäkt") {
@@ -126,7 +128,8 @@ export default function SkickaKvitto() {
                             datum: state.datum,
                             bild: downloadURL,
                             swish: state.swish,
-                            typavköp: state.typavkop
+                            typavköp: state.typavkop,
+                            fixad: false
                         }),
                     });
                 } else if (state.kategori === "" && state.typavkop === "avgift") {
@@ -139,7 +142,8 @@ export default function SkickaKvitto() {
                             datum: state.datum,
                             bild: downloadURL,
                             swish: state.swish,
-                            typavköp: state.typavkop
+                            typavköp: state.typavkop,
+                            fixad: false
                         }),
                     });
                 } else {
@@ -152,7 +156,8 @@ export default function SkickaKvitto() {
                             datum: state.datum,
                             bild: downloadURL,
                             swish: state.swish,
-                            typavköp: state.typavkop
+                            typavköp: state.typavkop,
+                            fixad: false
                         }),
                     });
                 }
