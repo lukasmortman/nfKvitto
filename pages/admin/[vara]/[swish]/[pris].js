@@ -178,7 +178,7 @@ export async function getStaticPaths() {
     const dataFixad = JSON.parse(JSON.stringify(data))
     const paths = dataFixad.map((data) => ({
         params: {
-            vara: data.vara, swish: data.swish, pris: data.pris.toString() + "€" + data.datum + "€" + data.kategori
+            vara: data.vara, swish: data.swish, pris: data.pris.toString() + "€" + data.datum + "€" + data.kategori + "€" + data.fixad
         }
     }))
     return {paths, fallback: true};
