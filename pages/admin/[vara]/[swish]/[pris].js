@@ -144,7 +144,6 @@ export default function Home({bild, attDisplera}) {
                             <button>tillbaka test</button>
                         </Link>
                         <button onClick={() => setByt(false)}>sluta ändra kvitto</button>
-                        <button onClick={() => console.log(state.fixad)}>test</button>
                         <form onSubmit={hanteraSubmit} onChange={hanteraNytt}>
                             <h3>vara: <input type="text" id="vara" defaultValue={state.vara}/></h3>
                             <h3>pris: <input type="number" id="pris" defaultValue={state.pris}/>kr </h3>
