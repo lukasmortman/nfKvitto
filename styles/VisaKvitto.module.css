@@ -12,6 +12,11 @@
     max-width: 400px;
 }
 
+.centerKnappar{
+    margin-top: 0.5vh;
+    display: flex;
+    justify-content: center;
+}
 
 .FlexAndCenter{
     display: flex;

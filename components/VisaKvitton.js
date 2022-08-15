@@ -1,7 +1,9 @@
-import Image from 'next/future/image'
+import Image from 'next/image'
 import styles from '../styles/VisaKvitto.module.css'
 import {saveAs} from "file-saver";
 import Link from 'next/link'
+import {useState} from "react";
+
 const ExcelJS = require('exceljs');
 const alphabetList = [
     "D",
@@ -191,7 +193,7 @@ export default function VisaKvitton({data}) {
                 border: {
                     bottom: {
                         style: "thin"
-                    },right: {
+                    }, right: {
                         style: "medium"
                     },
                     left: {
@@ -203,7 +205,7 @@ export default function VisaKvitton({data}) {
                 border: {
                     bottom: {
                         style: "thin"
-                    },right: {
+                    }, right: {
                         style: "medium"
                     }
                 },
@@ -241,43 +243,43 @@ export default function VisaKvitton({data}) {
             diverseDebit: "Debit",
             diverseKredit: "Kredit"
         })
-        let exceldata = data.sort((a, b) =>  new Date(a.datum) - new Date(b.datum));
+        let exceldata = data.sort((a, b) => new Date(a.datum) - new Date(b.datum));
         exceldata.forEach((item, i) => {
             let datums = new Date(item.datum);
             let priset = Number(item.pris)
-            if(item.typavköp === "avgift"){
-                if(item.kategori === "Kök&fester"){
-                    sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums,kökDebit:priset });
-                }else if(item.kategori === "Laborationer"){
-                    sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums,laborationerDebit:priset });
-                }else if(item.kategori === "Övrigt") {
+            if (item.typavköp === "avgift") {
+                if (item.kategori === "Kök&fester") {
+                    sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums, kökDebit: priset});
+                } else if (item.kategori === "Laborationer") {
+                    sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums, laborationerDebit: priset});
+                } else if (item.kategori === "Övrigt") {
                     sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums, övrigtDebit: priset});
-                }else if(item.kategori === "Medlemsavgifter") {
+                } else if (item.kategori === "Medlemsavgifter") {
                     sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums, medlemsavgifterDebit: priset});
-                }else if(item.kategori === "Försäljning") {
+                } else if (item.kategori === "Försäljning") {
                     sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums, försäljningDebit: priset});
-                }else if(item.kategori === "NF-artiklar") {
+                } else if (item.kategori === "NF-artiklar") {
                     sheet.addRow({kassaKredit: priset, ver: i + 1, datum: datums, artiklarDebit: priset});
                 }
-                sheet.getCell(`B${i+3}`).value = {
+                sheet.getCell(`B${i + 3}`).value = {
                     hyperlink: item.bild,
                     text: item.vara
                 }
-            }else if(item.typavköp === "intäkt"){
-                if(item.kategori === "Kök&fester"){
-                    sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums,kökKredit:priset });
-                }else if(item.kategori === "Laborationer"){
-                    sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums,laborationerKredit:priset });
-                }else if(item.kategori === "Övrigt") {
+            } else if (item.typavköp === "intäkt") {
+                if (item.kategori === "Kök&fester") {
+                    sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums, kökKredit: priset});
+                } else if (item.kategori === "Laborationer") {
+                    sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums, laborationerKredit: priset});
+                } else if (item.kategori === "Övrigt") {
                     sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums, övrigtKredit: priset});
-                }else if(item.kategori === "Medlemsavgifter") {
+                } else if (item.kategori === "Medlemsavgifter") {
                     sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums, medlemsavgifterKredit: priset});
-                }else if(item.kategori === "Försäljning") {
+                } else if (item.kategori === "Försäljning") {
                     sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums, försäljningKredit: priset});
-                }else if(item.kategori === "NF-artiklar") {
+                } else if (item.kategori === "NF-artiklar") {
                     sheet.addRow({kassaDebit: priset, ver: i + 1, datum: datums, artiklarKredit: priset});
                 }
-                sheet.getCell(`B${i+3}`).value = {
+                sheet.getCell(`B${i + 3}`).value = {
                     hyperlink: item.bild,
                     text: item.vara
                 }
@@ -358,60 +360,219 @@ export default function VisaKvitton({data}) {
         });
     }
 
-    return (
-        <>
+    const [visa, setVisa] = useState("alla")
+
+    function comp(a, b) {
+        return new Date(a.datum).getTime() - new Date(b.datum).getTime();
+    }
+
+    data.sort(comp)
+
+    if (visa === "intefixade") {
+        return (
+            <>
             <span className={styles.FlexAndCenter}>
                     <button className={styles.FlexAndCenter} onClick={() => handleExport()}>
                         exportera till excel
                     </button>
                 </span>
-            <div className={styles.Padding1REM}>
-                <h3 style={{marginBottom: "0"}}>senaste kvitton:</h3>
-                {data.slice(0).reverse().map(({vara, pris,kategori, datum, swish, bild,typavköp, fixad}) => {
-                    if(fixad === true){
+                <div className={styles.centerKnappar}>
+                    <button name="visaalla" value="alla" onClick={() => setVisa("alla")}>visa alla
+                    </button>
+                    <button name="visaintefixade" value="intefixade" onClick={() => setVisa("intefixade")}>visa inte
+                        fixade
+                    </button>
+                    <button name="visaintäkter" value="visaintäkter" onClick={() => setVisa("intäkt")}>visa intäkter
+                    </button>
+                    <button name="visautgifter" value="visautgifter" onClick={() => setVisa("avgift")}>visa avgifter
+                    </button>
+                </div>
+                <div className={styles.Padding1REM}>
+                    <h3 style={{marginBottom: "0"}}>senaste kvitton:</h3>
+                    {data.slice(0).reverse().map(({vara, pris, kategori, datum, swish, bild, typavköp, fixad}) => {
+                        if (fixad === false) {
+                            return (<div className={`${styles.parent}`} key={vara}>
+                                    <div className={styles.div6}>
+                                        <Link
+                                            href={`/admin/${vara}/${swish}/${pris + "€" + datum + "€" + kategori + "€" + fixad}`}>
+                                            <Image src={bild} alt={"bild på kvittot"} height={80} width={80}/>
+                                        </Link>
+                                    </div>
+                                    <div className={styles.div1}><p className={styles.fitText}>namn
+                                        på {typavköp}: {vara} </p>
+                                    </div>
+                                    <div className={styles.div2}><p className={styles.fitText}>pris
+                                        på {typavköp}: {pris}kr</p>
+                                    </div>
+                                    <div className={styles.div3}><p className={styles.fitText}>kategori
+                                        på {typavköp}: {kategori}</p>
+                                    </div>
+                                    <div className={styles.div4}><p className={styles.fitText}>datum {typavköp}en
+                                        skedde: {datum}</p>
+                                    </div>
+                                    <div className={styles.div5}><p className={styles.fitText}>swishnummer: {swish}</p>
+                                    </div>
+                                </div>
+                            )
+                        }
+                    })}
+                </div>
+            </>
+        )
+    } else if (visa === "intäkt") {
+        return (
+            <>
+            <span className={styles.FlexAndCenter}>
+                    <button className={styles.FlexAndCenter} onClick={() => handleExport()}>
+                        exportera till excel
+                    </button>
+                </span>
+                <div className={styles.centerKnappar}>
+                    <button name="visaalla" value="alla" onClick={() => setVisa("alla")}>visa alla
+                    </button>
+                    <button name="visaintefixade" value="intefixade" onClick={() => setVisa("intefixade")}>visa inte
+                        fixade
+                    </button>
+                    <button name="visaintäkter" value="visaintäkter" onClick={() => setVisa("intäkt")}>visa intäkter
+                    </button>
+                    <button name="visautgifter" value="visautgifter" onClick={() => setVisa("avgift")}>visa avgifter
+                    </button>
+                </div>
+                <div className={styles.Padding1REM}>
+                    <h3 style={{marginBottom: "0"}}>senaste kvitton:</h3>
+                    {data.slice(0).reverse().map(({vara, pris, kategori, datum, swish, bild, typavköp, fixad}) => {
+                        if (typavköp === "intäkt") {
+                            return (<div className={`${styles.parent}`} key={vara}>
+                                    <div className={styles.div6}>
+                                        <Link
+                                            href={`/admin/${vara}/${swish}/${pris + "€" + datum + "€" + kategori + "€" + fixad}`}>
+                                            <Image src={bild} alt={"bild på kvittot"} height={80} width={80}/>
+                                        </Link>
+                                    </div>
+                                    <div className={styles.div1}><p className={styles.fitText}>namn
+                                        på {typavköp}: {vara} </p>
+                                    </div>
+                                    <div className={styles.div2}><p className={styles.fitText}>pris
+                                        på {typavköp}: {pris}kr</p>
+                                    </div>
+                                    <div className={styles.div3}><p className={styles.fitText}>kategori
+                                        på {typavköp}: {kategori}</p>
+                                    </div>
+                                    <div className={styles.div4}><p className={styles.fitText}>datum {typavköp}en
+                                        skedde: {datum}</p>
+                                    </div>
+                                    <div className={styles.div5}><p className={styles.fitText}>swishnummer: {swish}</p>
+                                    </div>
+                                </div>
+                            )
+                        }
+                    })}
+                </div>
+            </>
+        )
+    } else if (visa === "avgift") {
+        return (
+            <>
+            <span className={styles.FlexAndCenter}>
+                    <button className={styles.FlexAndCenter} onClick={() => handleExport()}>
+                        exportera till excel
+                    </button>
+                </span>
+                <div className={styles.centerKnappar}>
+                    <button name="visaalla" value="alla" onClick={() => setVisa("alla")}>visa alla
+                    </button>
+                    <button name="visaintefixade" value="intefixade" onClick={() => setVisa("intefixade")}>visa inte
+                        fixade
+                    </button>
+                    <button name="visaintäkter" value="visaintäkter" onClick={() => setVisa("intäkt")}>visa intäkter
+                    </button>
+                    <button name="visautgifter" value="visautgifter" onClick={() => setVisa("avgift")}>visa avgifter
+                    </button>
+                </div>
+                <div className={styles.Padding1REM}>
+                    <h3 style={{marginBottom: "0"}}>senaste kvitton:</h3>
+                    {data.slice(0).reverse().map(({vara, pris, kategori, datum, swish, bild, typavköp, fixad}) => {
+                        if (typavköp === "avgift") {
+                            return (<div className={`${styles.parent}`} key={vara}>
+                                    <div className={styles.div6}>
+                                        <Link
+                                            href={`/admin/${vara}/${swish}/${pris + "€" + datum + "€" + kategori + "€" + fixad}`}>
+                                            <Image src={bild} alt={"bild på kvittot"} height={80} width={80}/>
+                                        </Link>
+                                    </div>
+                                    <div className={styles.div1}><p className={styles.fitText}>namn
+                                        på {typavköp}: {vara} </p>
+                                    </div>
+                                    <div className={styles.div2}><p className={styles.fitText}>pris
+                                        på {typavköp}: {pris}kr</p>
+                                    </div>
+                                    <div className={styles.div3}><p className={styles.fitText}>kategori
+                                        på {typavköp}: {kategori}</p>
+                                    </div>
+                                    <div className={styles.div4}><p className={styles.fitText}>datum {typavköp}en
+                                        skedde: {datum}</p>
+                                    </div>
+                                    <div className={styles.div5}><p className={styles.fitText}>swishnummer: {swish}</p>
+                                    </div>
+                                </div>
+                            )
+                        }
+                    })}
+                </div>
+            </>
+        )
+    } else {
+        return (
+            <>
+            <span className={styles.FlexAndCenter}>
+                    <button className={styles.FlexAndCenter} onClick={() => handleExport()}>
+                        exportera till excel
+                    </button>
+                </span>
+                <div className={styles.centerKnappar}>
+                    <button name="visaalla" value="alla" onClick={() => setVisa("alla")}>visa alla
+                    </button>
+                    <button name="visaintefixade" value="intefixade" onClick={() => setVisa("intefixade")}>visa inte
+                        fixade
+                    </button>
+                    <button name="visaintäkter" value="visaintäkter" onClick={() => setVisa("intäkt")}>visa intäkter
+                    </button>
+                    <button name="visautgifter" value="visautgifter" onClick={() => setVisa("avgift")}>visa avgifter
+                    </button>
+                </div>
+                <div className={styles.Padding1REM}>
+                    <h3 style={{marginBottom: "0"}}>senaste kvitton:</h3>
+                    {data.slice(0).reverse().map(({vara, pris, kategori, datum, swish, bild, typavköp, fixad}) => {
                         return (<div className={`${styles.parent}`} key={vara}>
-                            <div className={styles.div6}>
-                                <Link href={`/admin/${vara}/${swish}/${pris+"€"+datum+"€"+kategori+"€"+fixad}`}>
-                                    <Image src={bild} alt={"bild på kvittot"} height={80} width={80}/>
-                                </Link>
-                            </div>
-                            <div className={styles.div1}><p className={styles.fitText}>namn på {typavköp}: {vara} </p>
-                            </div>
-                            <div className={styles.div2}><p className={styles.fitText}>pris på {typavköp}: {pris}kr</p>
-                            </div>
-                            <div className={styles.div3}><p className={styles.fitText}>kategori på {typavköp}: {kategori}</p>
-                            </div>
-                            <div className={styles.div4}><p className={styles.fitText}>datum {typavköp}en skedde: {datum}</p>
-                            </div>
-                            <div className={styles.div5}><p className={styles.fitText}>swishnummer: {swish}</p>
-                            </div>
-                        </div>
-                        )
-                    }else{
-                        return (
-                            <div className={`${styles.parent}`} style={{color: "red"}} key={vara}>
                                 <div className={styles.div6}>
-                                    <Link href={`/admin/${vara}/${swish}/${pris+"€"+datum+"€"+kategori+"€"+fixad}`}>
+                                    <Link
+                                        href={`/admin/${vara}/${swish}/${pris + "€" + datum + "€" + kategori + "€" + fixad}`}>
                                         <Image src={bild} alt={"bild på kvittot"} height={80} width={80}/>
                                     </Link>
                                 </div>
-                                <div className={styles.div1}><p className={styles.fitText}>namn på {typavköp}: {vara} </p>
+                                <div className={styles.div1}><p className={styles.fitText}>namn
+                                    på {typavköp}: {vara} </p>
                                 </div>
-                                <div className={styles.div2}><p className={styles.fitText}>pris på {typavköp}: {pris}kr</p>
+                                <div className={styles.div2}><p className={styles.fitText}>pris
+                                    på {typavköp}: {pris}kr</p>
                                 </div>
-                                <div className={styles.div3}><p className={styles.fitText}>kategori på {typavköp}: {kategori}</p>
+                                <div className={styles.div3}><p className={styles.fitText}>kategori
+                                    på {typavköp}: {kategori}</p>
                                 </div>
-                                <div className={styles.div4}><p className={styles.fitText}>datum {typavköp}en skedde: {datum}</p>
+                                <div className={styles.div4}><p className={styles.fitText}>datum {typavköp}en
+                                    skedde: {datum}</p>
                                 </div>
                                 <div className={styles.div5}><p className={styles.fitText}>swishnummer: {swish}</p>
                                 </div>
                             </div>
-                            )
+                        )
+                    })
                     }
-                })}
-            </div>
-        </>
-    )
+                </div>
+            </>
+        )
+    }
+
 
 }
 
